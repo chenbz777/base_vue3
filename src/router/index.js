@@ -5,12 +5,28 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import('@/views/home.vue')
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('@/views/admin/index.vue'),
+    redirect: '/admin/home',
+    children: [
+      {
+        path: 'home',
+        name: 'adminHome',
+        component: () => import('@/views/admin/home/index.vue'),
+        meta: {
+          title: ['仪表盘']
+        }
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)',
+    name: '404',
+    component: () => import('@/views/404.vue')
   }
-  // {
-  //   path: '/:pathMatch(.*)',
-  //   name: '404',
-  //   component: () => import('@/views/404.vue')
-  // }
 ];
 
 const router = createRouter({

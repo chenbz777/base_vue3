@@ -8,3 +8,7 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.el-menu--popup {
+  padding: 6px !important;
+}

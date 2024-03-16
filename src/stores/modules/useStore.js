@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-const useStore = defineStore('main', {
+const useMenu = defineStore('main', {
   state: () => ({
     count: 0,
     peopleData: []
@@ -18,4 +18,4 @@ const useStore = defineStore('main', {
   }
 });
 
-export default useStore;
+export default useMenu;
