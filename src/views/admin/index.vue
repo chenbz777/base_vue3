@@ -25,16 +25,16 @@ import MainHead from './components/MainHead.vue';
 <style scoped>
 .admin {
   display: flex;
-  background-color: #f1f2f3;
+  background-color: var(--theme-page-color);
 }
 
 .admin__aside {
+  position: relative;
   height: 100vh;
-  padding: 10px;
+  padding: 10px 6px;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #ffffff;
-  border-right: 6px solid #f1f2f3;
+  background-color: var(--menu-bg-color);
 }
 
 .admin__main {
@@ -43,13 +43,13 @@ import MainHead from './components/MainHead.vue';
 }
 
 .admin__main__head {
-  background-color: #ffffff;
+  background-color: var(--theme-page-color);
 }
 
 .admin__main__content {
+  border-top: 1px solid var(--theme-divider-color);
   padding: 20px;
-  height: calc(100vh - 60px - 6px);
+  height: calc(100vh - 60px);
   overflow: auto;
-  background-color: #ffffff;
 }
 </style>

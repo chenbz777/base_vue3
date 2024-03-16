@@ -58,7 +58,6 @@ const logout = () => {
   align-items: center;
   height: 60px;
   padding: 0 20px;
-  border-bottom: 6px solid #f1f2f3;
 }
 
 .main__head__left {

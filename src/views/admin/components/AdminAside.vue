@@ -27,6 +27,6 @@ const store = useMenu();
   height: 60px;
   font-size: 22px;
   font-weight: 500;
-  color: #007aff;
+  color: var(--menu-active-color);
 }
 </style>

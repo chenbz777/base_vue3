@@ -38,8 +38,8 @@ const props = defineProps({
 }
 
 :deep(.el-sub-menu__title:hover) {
-  background-color: #007aff;
-  color: #ffffff;
+  background-color: var(--menu-active-color);
+  color: var(--menu-active-text-color);
 }
 
 .el-sub-menu .el-menu-item {
@@ -53,13 +53,13 @@ const props = defineProps({
 }
 
 .el-menu-item:hover {
-  background-color: #007aff;
-  color: #ffffff;
+  background-color: var(--menu-active-color);
+  color: var(--menu-active-text-color);
 }
 
 .el-menu-item.is-active,
 .el-menu-item:hover {
-  background-color: #007aff;
-  color: #ffffff;
+  background-color: var(--menu-active-color);
+  color: var(--menu-active-text-color);
 }
 </style>

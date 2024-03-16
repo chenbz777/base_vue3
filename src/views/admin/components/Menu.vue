@@ -48,8 +48,9 @@ const menuData = ref(adminMenuData);
 </template>
 
 <style scoped>
-.el-menu {
+:deep(.el-menu) {
   border-right: 0;
+  background-color: transparent;
 }
 
 .el-menu-vertical:not(.el-menu--collapse) {
