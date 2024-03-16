@@ -7,6 +7,11 @@ const routes = [
     component: () => import('@/views/home.vue')
   },
   {
+    path: '/admin/login',
+    name: 'adminLogin',
+    component: () => import('@/views/admin/login.vue')
+  },
+  {
     path: '/admin',
     name: 'admin',
     component: () => import('@/views/admin/index.vue'),
@@ -15,7 +20,7 @@ const routes = [
       {
         path: 'home',
         name: 'adminHome',
-        component: () => import('@/views/admin/home/index.vue'),
+        component: () => import('@/views/admin/home.vue'),
         meta: {
           title: ['仪表盘']
         }

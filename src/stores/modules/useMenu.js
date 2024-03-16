@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 const useStore = defineStore('menu', {
   state: () => ({
     isOpen: true,
-    showTitle: true
+    showTitle: true,
+    title: '后台管理系统'
   }),
   actions: {
     toggleCollapse() {

@@ -11,7 +11,7 @@ const store = useMenu();
       <el-icon :size="30">
         <ElementPlus />
       </el-icon>
-      <span v-show="store.showTitle">后台管理</span>
+      <span v-show="store.showTitle">{{ store.title }}</span>
     </div>
 
     <Menu class="admin__aside__menu" />
