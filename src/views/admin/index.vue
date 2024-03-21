@@ -1,6 +1,14 @@
 <script setup>
 import AdminAside from './components/AdminAside.vue';
 import MainHead from './components/MainHead.vue';
+import { useRoute } from 'vue-router';
+import useRouterPlus from '@/hooks/useRouterPlus';
+import RouteTabs from './components/RouteTabs.vue';
+
+
+const route = useRoute();
+
+const { keepAliveList, formatComponentInstance } = useRouterPlus();
 </script>
 
 <template>
@@ -14,9 +22,18 @@ import MainHead from './components/MainHead.vue';
     <div class="admin__main">
       <!-- 内容顶部区域 -->
       <MainHead class="admin__main__head" />
+      <RouteTabs />
 
       <div class="admin__main__content">
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
+
+        <router-view v-slot="{ Component }">
+          <transition mode="out-in" name="el-fade-in-linear">
+            <keep-alive :include="keepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
+              <component :is="formatComponentInstance(Component, route)" :key="route.fullPath" />
+            </keep-alive>
+          </transition>
+        </router-view>
       </div>
     </div>
   </div>
@@ -47,7 +64,6 @@ import MainHead from './components/MainHead.vue';
 }
 
 .admin__main__content {
-  border-top: 1px solid var(--theme-divider-color);
   padding: 20px;
   height: calc(100vh - 60px);
   overflow: auto;

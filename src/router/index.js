@@ -15,14 +15,27 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('@/views/admin/index.vue'),
+    meta: {
+      title: '后台管理'
+    },
     redirect: '/admin/home',
     children: [
       {
         path: 'home',
-        name: 'adminHome',
+        name: 'home',
         component: () => import('@/views/admin/home.vue'),
         meta: {
-          title: ['仪表盘']
+          title: '仪表盘',
+          keepAlive: true
+        }
+      },
+      {
+        path: 'home2/:id',
+        name: 'home2',
+        component: () => import('@/views/admin/home2.vue'),
+        meta: {
+          title: '仪表盘2',
+          keepAlive: true
         }
       }
     ]

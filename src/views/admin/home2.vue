@@ -1,10 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const num = ref(1);
+const num = ref(2);
 
 onMounted(() => {
-  console.log('home onMounted');
+  console.log('home2 onMounted');
 });
 </script>
 
