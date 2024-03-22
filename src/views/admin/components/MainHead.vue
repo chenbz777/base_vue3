@@ -15,8 +15,6 @@ const userInfo = utils.localStorage.get('user') || { username: '默认昵称' };
 
 const { routesMap } = getRoutesData();
 
-const routeData = routesMap.get(route.name);
-
 const logout = () => {
   utils.localStorage.delAll();
 
@@ -43,11 +41,12 @@ const toggleFullScreen = () => {
       </el-icon>
 
       <el-breadcrumb>
-        <el-breadcrumb-item v-for="item  in  routeData.parentList" :key="item.name" :to="{ name: item.name }">
+        <el-breadcrumb-item v-for="item  in  routesMap.get(route.name).parentList" :key="item.name"
+          :to="{ name: item.name }">
           {{ item.meta.title }}
         </el-breadcrumb-item>
         <el-breadcrumb-item>
-          {{ routeData.meta.title }}
+          {{ routesMap.get(route.name).meta.title }}
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
