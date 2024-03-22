@@ -65,7 +65,7 @@ const { keepAliveList, formatComponentInstance } = useRouterPlus();
 
 .admin__main__content {
   padding: 20px;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 60px - 42px);
   overflow: auto;
 }
 </style>
