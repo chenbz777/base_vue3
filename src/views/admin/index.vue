@@ -28,11 +28,11 @@ const { keepAliveList, formatComponentInstance } = useRouterPlus();
         <!-- <router-view></router-view> -->
 
         <router-view v-slot="{ Component }">
-          <transition mode="out-in" name="el-fade-in-linear">
+          <AnimateTransition>
             <keep-alive :include="keepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
               <component :is="formatComponentInstance(Component, route)" :key="route.fullPath" />
             </keep-alive>
-          </transition>
+          </AnimateTransition>
         </router-view>
       </div>
     </div>

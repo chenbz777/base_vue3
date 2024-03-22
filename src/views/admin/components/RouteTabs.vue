@@ -105,6 +105,15 @@ const handleTabRemove = (fullPath) => {
   display: none;
 }
 
+:deep(.el-tabs__nav-scroll) {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+:deep(.el-tabs__nav-scroll::-webkit-scrollbar) {
+  display: none;
+}
+
 .rt-el-tabs__item {
   max-width: 160px;
   text-overflow: ellipsis;
