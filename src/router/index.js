@@ -22,7 +22,7 @@ const routes = [
     children: [
       {
         path: 'home',
-        name: 'home',
+        name: 'adminHome',
         component: () => import('@/views/admin/home.vue'),
         meta: {
           title: '仪表盘',
@@ -31,7 +31,7 @@ const routes = [
       },
       {
         path: 'home2/:id',
-        name: 'home2',
+        name: 'adminHome2',
         component: () => import('@/views/admin/home2.vue'),
         meta: {
           title: '仪表盘2',

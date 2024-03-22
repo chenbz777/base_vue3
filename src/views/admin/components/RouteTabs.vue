@@ -13,15 +13,15 @@ const { keepAliveList, componentMap } = useRouterPlus();
 watch(() => route.fullPath, () => {
   const routeData = {};
 
-  const defaultMeta = {
+  const routeMeta = Object.assign({
     title: '默认标题',
     keepAlive: false
-  };
+  }, route.meta || {});
 
   routeData.fullPath = route.fullPath;
   routeData.path = route.path;
   routeData.name = route.name;
-  routeData.meta = route.meta || defaultMeta;
+  routeData.meta = routeMeta;
 
   if (!keepAliveList.find(item => item.fullPath === routeData.fullPath)) {
     keepAliveList.push(routeData);
