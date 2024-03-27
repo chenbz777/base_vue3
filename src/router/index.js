@@ -37,6 +37,16 @@ const routes = [
           title: '仪表盘2',
           keepAlive: true
         }
+      },
+      {
+        path: 'blank',
+        name: 'adminBlank',
+        meta: {
+          title: '空白页',
+          keepAlive: false,
+          collect: false
+        },
+        component: () => import('@/views/admin/blank.vue')
       }
     ]
   },

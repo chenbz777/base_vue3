@@ -68,22 +68,19 @@ const toggleFullScreen = () => {
         <FullScreen />
       </el-icon>
 
-      <el-popover placement="bottom" :width="200" trigger="click">
-        <template #reference>
-          <el-button text class="c-row-center-y">
-            {{ userInfo.username }}
-            <el-icon class="ml-1">
-              <ArrowDownBold />
-            </el-icon>
-          </el-button>
+      <el-dropdown>
+        <el-button type="" text>
+          {{ userInfo.username }}
+          <el-icon class="ml-1">
+            <ArrowDownBold />
+          </el-icon>
+        </el-button>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="logout()">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
         </template>
-
-        <div>
-          <el-button text class="w-100" @click="logout()">
-            退出登录
-          </el-button>
-        </div>
-      </el-popover>
+      </el-dropdown>
     </div>
   </div>
 </template>

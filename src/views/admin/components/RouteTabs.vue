@@ -15,7 +15,8 @@ watch(() => route.fullPath, () => {
 
   const routeMeta = Object.assign({
     title: '默认标题',
-    keepAlive: false
+    keepAlive: false,
+    collect: true
   }, route.meta || {});
 
   routeData.fullPath = route.fullPath;
@@ -23,7 +24,7 @@ watch(() => route.fullPath, () => {
   routeData.name = route.name;
   routeData.meta = routeMeta;
 
-  if (!keepAliveList.find(item => item.fullPath === routeData.fullPath)) {
+  if (!keepAliveList.find(item => item.fullPath === routeData.fullPath) && routeMeta.collect) {
     keepAliveList.push(routeData);
   }
 }, { immediate: true });
@@ -55,13 +56,41 @@ const handleTabRemove = (fullPath) => {
   keepAliveList.splice(index, 1);
   componentMap.delete(fullPath);
 };
+
+// 刷新当前页
+const refreshCurrentTab = () => {
+
+  const data = keepAliveList.find(item => item.fullPath === route.fullPath);
+
+  data.meta.keepAlive = false;
+
+  router.afterEach(() => {
+    data.meta.keepAlive = true;
+  });
+
+  router.push('/admin/blank');
+};
+
+// 关闭当前标签
+const closeCurrentTab = () => {
+  handleTabRemove(route.fullPath);
+};
+
+// 关闭其它标签
+const closeOtherTabs = () => {
+
+  for (let i = keepAliveList.length - 1; i >= 0; i--) {
+    if (keepAliveList[i].fullPath !== route.fullPath) {
+      keepAliveList.splice(i, 1);
+    }
+  }
+};
 </script>
 
 <template>
   <div class="route-tabs">
     <el-tabs :model-value="route.fullPath" type="card" editable @tab-change="handleTabChange"
-      @tab-remove="handleTabRemove">
-
+      @tab-remove="handleTabRemove" class="route-tabs__left">
       <el-tab-pane v-for="item in keepAliveList" :key="item.name" :name="item.fullPath">
         <template #label>
           <div class="rt-el-tabs__item--tips"></div>
@@ -69,6 +98,24 @@ const handleTabRemove = (fullPath) => {
         </template>
       </el-tab-pane>
     </el-tabs>
+
+    <div class="route-tabs__right">
+      <el-dropdown>
+        <el-button type="" text>
+          更多
+          <el-icon class="el-icon--right">
+            <ArrowDownBold />
+          </el-icon>
+        </el-button>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="refreshCurrentTab()">刷新当前页</el-dropdown-item>
+            <el-dropdown-item @click="closeCurrentTab()">关闭当前标签</el-dropdown-item>
+            <el-dropdown-item @click="closeOtherTabs()">关闭其它标签</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
@@ -77,6 +124,17 @@ const handleTabRemove = (fullPath) => {
   border-top: 1px solid var(--theme-divider-color);
   border-bottom: 1px solid var(--theme-divider-color);
   padding-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.route-tabs__left {
+  flex: 1;
+  width: 0;
+}
+
+.route-tabs__right {
+  padding: 0 10px;
 }
 
 :deep(.el-tabs--card>.el-tabs__header) {
@@ -105,15 +163,6 @@ const handleTabRemove = (fullPath) => {
   display: none;
 }
 
-:deep(.el-tabs__nav-scroll) {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-:deep(.el-tabs__nav-scroll::-webkit-scrollbar) {
-  display: none;
-}
-
 .rt-el-tabs__item {
   max-width: 160px;
   text-overflow: ellipsis;
@@ -131,5 +180,9 @@ const handleTabRemove = (fullPath) => {
 
 :deep(.el-tabs__item.is-active .rt-el-tabs__item--tips) {
   background-color: var(--menu-active-color);
+}
+
+:deep(.el-tabs--card>.el-tabs__header .el-tabs__item) {
+  border: 0;
 }
 </style>
