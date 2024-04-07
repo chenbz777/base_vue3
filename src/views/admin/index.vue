@@ -27,13 +27,15 @@ const { keepAliveList, formatComponentInstance } = useRouterPlus();
       <div class="admin__main__content">
         <!-- <router-view></router-view> -->
 
-        <router-view v-slot="{ Component }">
-          <AnimateTransition>
-            <keep-alive :include="keepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
-              <component :is="formatComponentInstance(Component, route)" :key="route.fullPath" />
-            </keep-alive>
-          </AnimateTransition>
-        </router-view>
+        <div class="admin__main__content__body">
+          <router-view v-slot="{ Component }">
+            <AnimateTransition>
+              <keep-alive :include="keepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
+                <component :is="formatComponentInstance(Component, route)" :key="route.fullPath" />
+              </keep-alive>
+            </AnimateTransition>
+          </router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -52,6 +54,7 @@ const { keepAliveList, formatComponentInstance } = useRouterPlus();
   overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--menu-bg-color);
+  border-right: 1px solid var(--theme-divider-color);
 }
 
 .admin__main {
@@ -64,8 +67,15 @@ const { keepAliveList, formatComponentInstance } = useRouterPlus();
 }
 
 .admin__main__content {
-  padding: 20px;
+  padding: 10px;
   height: calc(100vh - 60px - 42px);
   overflow: auto;
+  background-color: #f1f2f3;
+}
+
+.admin__main__content__body {
+  padding: 20px;
+  background-color: var(--theme-page-color);
+  border-radius: 4px;
 }
 </style>
