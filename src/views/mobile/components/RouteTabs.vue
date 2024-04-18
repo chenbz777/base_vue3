@@ -76,8 +76,8 @@ defineExpose({
 }
 
 .route-tabs__card {
-  border: 3px solid #909399;
-  border-radius: 12px;
+  border: 5px solid #909399;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -89,9 +89,9 @@ defineExpose({
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 12px;
+  padding: 8px 18px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   background-color: #eaeaea;
   color: #303133;
   border-bottom: 1px solid #e2e2e2;
