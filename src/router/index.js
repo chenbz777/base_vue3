@@ -85,7 +85,7 @@ router.afterEach((to, from) => {
   setTimeout(async () => {
     if (document.getElementById('mobileBody')) {
       try {
-        const imageUrl = await domtoimage.toPng(document.getElementById('mobileBody'), { width: window.innerWidth, height: window.innerWidth });
+        const imageUrl = await domtoimage.toPng(document.getElementById('mobileBody'), { width: window.innerWidth, height: window.innerWidth * 1.2 });
 
         keepAliveList.find((item) => item.fullPath === to.fullPath).thumbnail = imageUrl;
       } catch {
