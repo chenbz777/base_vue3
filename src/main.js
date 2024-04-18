@@ -35,7 +35,4 @@ app.use(ElementPlus, {
   locale: zhCn
 });
 
-app.component('AnimateTransition', AnimateTransition);
-app.component('AnimateTransitionGroup', AnimateTransitionGroup);
-
 app.mount('#app');
