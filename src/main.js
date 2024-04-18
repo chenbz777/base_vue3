@@ -13,9 +13,16 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 // 引入animate动画样式
 import 'animate.css';
 
+// 引入全局组件
+import AnimateTransition from '@/components/AnimateTransition.vue';
+import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';
+
 const pinia = createPinia();
 
 const app = createApp(App);
+
+app.component('AnimateTransition', AnimateTransition);
+app.component('AnimateTransitionGroup', AnimateTransitionGroup);
 
 app.use(pinia);
 app.use(router);
