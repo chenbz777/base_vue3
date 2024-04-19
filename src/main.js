@@ -1,6 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createPinia } from 'pinia';
+import Vant from 'vant';
+// 2. 引入组件样式
+import 'vant/lib/index.css';
 
 // 路由
 import router from './router';
@@ -35,4 +38,5 @@ app.use(ElementPlus, {
   locale: zhCn
 });
 
+app.use(Vant);
 app.mount('#app');

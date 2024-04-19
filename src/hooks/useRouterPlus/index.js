@@ -1,6 +1,8 @@
 
 import { reactive, h } from 'vue';
 import router from '@/router';
+import domtoimage from 'dom-to-image-more';
+
 
 
 const getRoutesData = () => {
@@ -77,11 +79,30 @@ const formatComponentInstance = (component, route) => {
   }
 };
 
+async function getCurrentPageThumbnail(fullPath) {
+  if (document.getElementById('mobileBody')) {
+    const width = window.innerWidth < 500 ? window.innerWidth : 500;
+
+    try {
+      const imageUrl = await domtoimage.toPng(document.getElementById('mobileBody'), { width, height: width * 1.2 });
+
+      const routeData = keepAliveList.find((item) => item.fullPath === fullPath);
+
+      if (routeData) {
+        routeData.thumbnail = imageUrl;
+      }
+    } catch {
+      console.log('截图失败');
+    }
+  }
+}
+
 export default function useRouterPlus() {
   return {
     getRoutesData,
     keepAliveList,
     componentMap,
-    formatComponentInstance
+    formatComponentInstance,
+    getCurrentPageThumbnail
   };
 }
