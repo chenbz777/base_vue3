@@ -1,9 +1,9 @@
+import { nextTick } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import domtoimage from 'dom-to-image-more';
 import useRouterPlus from '@/hooks/useRouterPlus';
 
 
-const { keepAliveList } = useRouterPlus();
+const { getCurrentPageThumbnail } = useRouterPlus();
 
 const routes = [
   {
@@ -73,8 +73,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
 
-  // 路由守卫逻辑
-
   // 通过 return turn;
   // 不通过 return false;
   return true;
@@ -82,17 +80,11 @@ router.beforeEach(async (to, from) => {
 
 // 路由后置守卫: 用于截图
 router.afterEach((to, from) => {
-  setTimeout(async () => {
-    if (document.getElementById('mobileBody')) {
-      try {
-        const imageUrl = await domtoimage.toPng(document.getElementById('mobileBody'), { width: window.innerWidth, height: window.innerWidth * 1.2 });
-
-        keepAliveList.find((item) => item.fullPath === to.fullPath).thumbnail = imageUrl;
-      } catch {
-        console.log('截图失败');
-      }
-    }
-  }, 500);
+  nextTick(() => {
+    setTimeout(() => {
+      getCurrentPageThumbnail(to.fullPath);
+    }, 600);
+  });
 });
 
 export default router;

@@ -2,8 +2,13 @@
 import { watch, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import useRouterPlus from '@/hooks/useRouterPlus';
-import MobileHead from './components/MobileHead.vue';
-import MobileFoot from './components/mobileFoot.vue';
+// import MobileHead from './components/MobileHead.vue';
+import MobileFoot from './components/MobileFoot.vue';
+
+/**
+ * 前言: 本页面是移动端的主页面, 用于展示移动端的内容
+ * MobileHead 和 MobileFoot 功能上基本一致, 所以这里只展示一个, 后续可根据需求自行决定使用哪个, 建议使用 MobileFoot
+ */
 
 
 const route = useRoute();
@@ -33,8 +38,10 @@ watch(() => route.fullPath, () => {
   const index = keepAliveList.findIndex(item => item.fullPath === route.fullPath);
   keepAliveList.length = index + 1;
   // end
+
 }, { immediate: true });
 
+// 初始化移动端高度
 function initMobileHeight() {
   const mobile = document.getElementById('mobile');
 
@@ -58,7 +65,7 @@ window.onresize = function () {
 
 <template>
   <div class="mobile" id="mobile">
-    <MobileHead id="mobileHead" />
+    <!-- <MobileHead id="mobileHead" /> -->
 
     <div class="mobile__body" id="mobileBody">
       <router-view v-slot="{ Component }">
@@ -86,7 +93,8 @@ window.onresize = function () {
 
 .mobile__body {
   flex: 1;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--mobile-bg-color);
 }
 </style>

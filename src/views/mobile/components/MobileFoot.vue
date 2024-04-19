@@ -1,15 +1,17 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { Menu, HomeFilled, ArrowLeftBold } from '@element-plus/icons-vue';
+import { HomeFilled, ArrowLeftBold } from '@element-plus/icons-vue';
 import RouteTabs from './RouteTabs.vue';
+import useRouterPlus from '@/hooks/useRouterPlus';
 
 const router = useRouter();
-
 const routeTabsRef = ref();
 
+const { keepAliveList } = useRouterPlus();
+
 // 点击菜单按钮
-function handleMenuClick() {
+async function handleMenuClick() {
   routeTabsRef.value.open();
 }
 
@@ -27,9 +29,9 @@ function handleBackClick() {
 <template>
   <div class="mobile__foot">
     <div class="mobile__foot__menu" @click="handleMenuClick()">
-      <el-icon class="mobile__foot__icon">
-        <Menu />
-      </el-icon>
+      <div class="mobile__foot__menu__win">
+        {{ keepAliveList.length }}
+      </div>
     </div>
     <div class="mobile__foot__menu" @click="handleHomeClick()">
       <el-icon class="mobile__foot__icon">
@@ -65,5 +67,15 @@ function handleBackClick() {
 .mobile__foot__icon {
   display: block;
   font-size: 26px;
+}
+
+.mobile__foot__menu__win {
+  border: 2px solid #2a2b2d;
+  color: #2a2b2d;
+  border-radius: 4px;
+  font-weight: 500;
+  width: 26px;
+  height: 26px;
+  text-align: center;
 }
 </style>

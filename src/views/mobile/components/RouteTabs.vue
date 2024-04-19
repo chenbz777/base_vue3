@@ -49,7 +49,7 @@ defineExpose({
           <div class="route-tabs__card__title">
             {{ item.meta?.title || item.name }}
           </div>
-          <img :src="item.thumbnail" alt="" class="route-tabs__card__image" />
+          <img :src="item.thumbnail" alt="" class="route-tabs__card__image" :key="item.thumbnail" />
         </div>
 
         <div class="text-center" v-if="(index + 1) !== keepAliveList.length">
