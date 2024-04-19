@@ -13,7 +13,7 @@ import MobileFoot from './components/MobileFoot.vue';
 
 const route = useRoute();
 
-const { keepAliveList, formatComponentInstance } = useRouterPlus();
+const { mobileKeepAliveList, formatComponentInstance } = useRouterPlus();
 
 watch(() => route.fullPath, () => {
   const routeData = {};
@@ -29,15 +29,15 @@ watch(() => route.fullPath, () => {
   routeData.name = route.name;
   routeData.meta = routeMeta;
 
-  if (!keepAliveList.find(item => item.fullPath === routeData.fullPath) && routeMeta.collect) {
-    keepAliveList.push(routeData);
+  if (!mobileKeepAliveList.find(item => item.fullPath === routeData.fullPath) && routeMeta.collect) {
+    mobileKeepAliveList.push(routeData);
   }
 
 
   // 这里是定制逻辑,切换回前面的页面, 就把后面的路由删了
-  const index = keepAliveList.findIndex(item => item.fullPath === route.fullPath);
+  const index = mobileKeepAliveList.findIndex(item => item.fullPath === route.fullPath);
   if (index !== -1) {
-    keepAliveList.length = index + 1;
+    mobileKeepAliveList.length = index + 1;
   }
   // end
 
@@ -72,7 +72,7 @@ window.onresize = function () {
     <div class="mobile__body" id="mobileBody">
       <router-view v-slot="{ Component }">
         <AnimateTransition>
-          <keep-alive :include="keepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
+          <keep-alive :include="mobileKeepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
             <component :is="formatComponentInstance(Component, route)" :key="route.fullPath" />
           </keep-alive>
         </AnimateTransition>

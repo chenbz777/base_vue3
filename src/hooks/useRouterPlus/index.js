@@ -50,7 +50,7 @@ const getRoutesData = () => {
   };
 };
 
-let keepAliveList = reactive([]);
+const mobileKeepAliveList = reactive([]);
 
 // 用来存已经创建的组件
 const componentMap = new Map();
@@ -86,7 +86,7 @@ async function getCurrentPageThumbnail(fullPath) {
     try {
       const imageUrl = await domtoimage.toPng(document.getElementById('mobileBody'), { width, height: width * 1.2 });
 
-      const routeData = keepAliveList.find((item) => item.fullPath === fullPath);
+      const routeData = mobileKeepAliveList.find((item) => item.fullPath === fullPath);
 
       if (routeData) {
         routeData.thumbnail = imageUrl;
@@ -100,7 +100,7 @@ async function getCurrentPageThumbnail(fullPath) {
 export default function useRouterPlus() {
   return {
     getRoutesData,
-    keepAliveList,
+    mobileKeepAliveList,
     componentMap,
     formatComponentInstance,
     getCurrentPageThumbnail
