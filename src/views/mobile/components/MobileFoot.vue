@@ -9,7 +9,7 @@ const router = useRouter();
 const route = useRoute();
 const routeTabsRef = ref();
 
-const { keepAliveList } = useRouterPlus();
+const { mobileKeepAliveList } = useRouterPlus();
 
 // 点击菜单按钮
 async function handleMenuClick() {
@@ -28,7 +28,7 @@ function handleBackClick() {
 
 // 点击刷新按钮
 function handleRefreshClick() {
-  const data = keepAliveList.find(item => item.fullPath === route.fullPath);
+  const data = mobileKeepAliveList.find(item => item.fullPath === route.fullPath);
 
   data.meta.keepAlive = false;
 
@@ -49,7 +49,7 @@ function handleForwardClick() {
   <div class="mobile__foot">
     <div class="mobile__foot__menu" @click="handleMenuClick()">
       <div class="mobile__foot__menu__win">
-        {{ keepAliveList.length }}
+        {{ mobileKeepAliveList.length }}
       </div>
     </div>
     <!-- 刷新功能已经写好, 根据需求再开启 -->

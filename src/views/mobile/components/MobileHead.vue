@@ -34,7 +34,7 @@ function handleBackClick() {
 
 const routeTabsRef = ref();
 
-const { keepAliveList } = useRouterPlus();
+const { mobileKeepAliveList } = useRouterPlus();
 
 // 点击菜单按钮
 async function handleMenuClick() {
@@ -52,7 +52,7 @@ async function handleMenuClick() {
     <div class="mobile__head__content"> {{ title }}</div>
     <div class="mobile__head__tool" @click="handleMenuClick()">
       <div class="mobile__head__win">
-        {{ keepAliveList.length }}
+        {{ mobileKeepAliveList.length }}
       </div>
     </div>
 

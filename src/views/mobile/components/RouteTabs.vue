@@ -8,7 +8,7 @@ import { ArrowUpBold } from '@element-plus/icons-vue';
 const router = useRouter();
 const route = useRoute();
 
-const { keepAliveList } = useRouterPlus();
+const { mobileKeepAliveList } = useRouterPlus();
 
 const show = ref(false);
 
@@ -43,7 +43,7 @@ defineExpose({
 <template>
   <div class="route-tabs" v-show="show" @click="close()" id="routeTabs">
     <el-row :gutter="20" justify="center">
-      <el-col :span="18" v-for="(item, index) in [...keepAliveList].reverse()" :key="item.name">
+      <el-col :span="18" v-for="(item, index) in [...mobileKeepAliveList].reverse()" :key="item.name">
         <div class="route-tabs__card" :class="{ 'route-tabs__card--active': item.fullPath === route.fullPath }"
           @click.stop="handleTabChange(item.fullPath)">
           <div class="route-tabs__card__title">
@@ -52,7 +52,7 @@ defineExpose({
           <img :src="item.thumbnail" alt="" class="route-tabs__card__image" :key="item.thumbnail" />
         </div>
 
-        <div class="text-center" v-if="(index + 1) !== keepAliveList.length">
+        <div class="text-center" v-if="(index + 1) !== mobileKeepAliveList.length">
           <el-icon class="route-tabs__icon">
             <ArrowUpBold />
           </el-icon>
