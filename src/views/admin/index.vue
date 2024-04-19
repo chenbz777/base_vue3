@@ -8,7 +8,7 @@ import RouteTabs from './components/RouteTabs.vue';
 
 const route = useRoute();
 
-const { keepAliveList, formatComponentInstance } = useRouterPlus();
+const { adminKeepAliveList, formatComponentInstance } = useRouterPlus();
 </script>
 
 <template>
@@ -30,7 +30,7 @@ const { keepAliveList, formatComponentInstance } = useRouterPlus();
         <div class="admin__main__content__body">
           <router-view v-slot="{ Component }">
             <AnimateTransition>
-              <keep-alive :include="keepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
+              <keep-alive :include="adminKeepAliveList.filter(item => item.meta.keepAlive).map(item => item.fullPath)">
                 <component :is="formatComponentInstance(Component, route)" :key="route.fullPath" />
               </keep-alive>
             </AnimateTransition>

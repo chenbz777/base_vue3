@@ -4,7 +4,6 @@ import router from '@/router';
 import domtoimage from 'dom-to-image-more';
 
 
-
 const getRoutesData = () => {
 
   const routesTree = JSON.parse(JSON.stringify(router.options.routes));
@@ -49,6 +48,8 @@ const getRoutesData = () => {
     routesMap
   };
 };
+
+const adminKeepAliveList = reactive([]);
 
 const mobileKeepAliveList = reactive([]);
 
@@ -100,6 +101,7 @@ async function getCurrentPageThumbnail(fullPath) {
 export default function useRouterPlus() {
   return {
     getRoutesData,
+    adminKeepAliveList,
     mobileKeepAliveList,
     componentMap,
     formatComponentInstance,

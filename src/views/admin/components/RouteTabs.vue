@@ -8,7 +8,7 @@ import { ElNotification } from 'element-plus';
 const route = useRoute();
 const router = useRouter();
 
-const { keepAliveList, componentMap } = useRouterPlus();
+const { adminKeepAliveList, componentMap } = useRouterPlus();
 
 watch(() => route.fullPath, () => {
   const routeData = {};
@@ -24,8 +24,8 @@ watch(() => route.fullPath, () => {
   routeData.name = route.name;
   routeData.meta = routeMeta;
 
-  if (!keepAliveList.find(item => item.fullPath === routeData.fullPath) && routeMeta.collect) {
-    keepAliveList.push(routeData);
+  if (!adminKeepAliveList.find(item => item.fullPath === routeData.fullPath) && routeMeta.collect) {
+    adminKeepAliveList.push(routeData);
   }
 }, { immediate: true });
 
@@ -35,10 +35,10 @@ const handleTabChange = (fullPath) => {
 
 const handleTabRemove = (fullPath) => {
 
-  const index = keepAliveList.findIndex(item => item.fullPath === fullPath);
+  const index = adminKeepAliveList.findIndex(item => item.fullPath === fullPath);
 
   if (fullPath === route.fullPath) {
-    if (keepAliveList.length === 1) {
+    if (adminKeepAliveList.length === 1) {
       ElNotification({
         title: '提示',
         message: '当前仅剩一个标签页, 不可关闭!',
@@ -47,20 +47,20 @@ const handleTabRemove = (fullPath) => {
 
       return false;
     } else if (index === 0) {
-      router.push(keepAliveList[index + 1].fullPath);
+      router.push(adminKeepAliveList[index + 1].fullPath);
     } else {
-      router.push(keepAliveList[index - 1].fullPath);
+      router.push(adminKeepAliveList[index - 1].fullPath);
     }
   }
 
-  keepAliveList.splice(index, 1);
+  adminKeepAliveList.splice(index, 1);
   componentMap.delete(fullPath);
 };
 
 // 刷新当前页
 const refreshCurrentTab = () => {
 
-  const data = keepAliveList.find(item => item.fullPath === route.fullPath);
+  const data = adminKeepAliveList.find(item => item.fullPath === route.fullPath);
 
   data.meta.keepAlive = false;
 
@@ -79,9 +79,9 @@ const closeCurrentTab = () => {
 // 关闭其它标签
 const closeOtherTabs = () => {
 
-  for (let i = keepAliveList.length - 1; i >= 0; i--) {
-    if (keepAliveList[i].fullPath !== route.fullPath) {
-      keepAliveList.splice(i, 1);
+  for (let i = adminKeepAliveList.length - 1; i >= 0; i--) {
+    if (adminKeepAliveList[i].fullPath !== route.fullPath) {
+      adminKeepAliveList.splice(i, 1);
     }
   }
 };
@@ -91,7 +91,7 @@ const closeOtherTabs = () => {
   <div class="route-tabs">
     <el-tabs :model-value="route.fullPath" type="card" editable @tab-change="handleTabChange"
       @tab-remove="handleTabRemove" class="route-tabs__left">
-      <el-tab-pane v-for="item in keepAliveList.filter(item => item.fullPath.includes('admin'))" :key="item.name"
+      <el-tab-pane v-for="item in adminKeepAliveList.filter(item => item.fullPath.includes('admin'))" :key="item.name"
         :name="item.fullPath">
         <template #label>
           <div class="rt-el-tabs__item--tips"></div>
