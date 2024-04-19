@@ -15,7 +15,7 @@ onMounted(() => {
 
     <router-link to="/mobile/home3">
       <h2>
-        home3
+        点击千万home3
       </h2>
     </router-link>
   </div>

@@ -14,7 +14,7 @@ onMounted(() => {
 
     <router-link to="/mobile/home2">
       <h2>
-        home2
+        点击前往home2
       </h2>
     </router-link>
   </div>

@@ -36,7 +36,9 @@ watch(() => route.fullPath, () => {
 
   // 这里是定制逻辑,切换回前面的页面, 就把后面的路由删了
   const index = keepAliveList.findIndex(item => item.fullPath === route.fullPath);
-  keepAliveList.length = index + 1;
+  if (index !== -1) {
+    keepAliveList.length = index + 1;
+  }
   // end
 
 }, { immediate: true });

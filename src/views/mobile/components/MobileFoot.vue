@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { HomeFilled, ArrowLeftBold } from '@element-plus/icons-vue';
+import { useRoute, useRouter } from 'vue-router';
+import { HomeFilled, ArrowLeftBold, Refresh, ArrowRightBold } from '@element-plus/icons-vue';
 import RouteTabs from './RouteTabs.vue';
 import useRouterPlus from '@/hooks/useRouterPlus';
 
 const router = useRouter();
+const route = useRoute();
 const routeTabsRef = ref();
 
 const { keepAliveList } = useRouterPlus();
@@ -24,6 +25,24 @@ function handleHomeClick() {
 function handleBackClick() {
   router.back();
 }
+
+// 点击刷新按钮
+function handleRefreshClick() {
+  const data = keepAliveList.find(item => item.fullPath === route.fullPath);
+
+  data.meta.keepAlive = false;
+
+  router.afterEach(() => {
+    data.meta.keepAlive = true;
+  });
+
+  router.push('/mobile/blank');
+}
+
+// 点击前进按钮
+function handleForwardClick() {
+  router.forward();
+}
 </script>
 
 <template>
@@ -33,6 +52,12 @@ function handleBackClick() {
         {{ keepAliveList.length }}
       </div>
     </div>
+    <!-- 刷新功能已经写好, 根据需求再开启 -->
+    <div class="mobile__foot__menu" @click="handleRefreshClick()" style="display: none;">
+      <el-icon class="mobile__foot__icon">
+        <Refresh />
+      </el-icon>
+    </div>
     <div class="mobile__foot__menu" @click="handleHomeClick()">
       <el-icon class="mobile__foot__icon">
         <HomeFilled />
@@ -41,6 +66,12 @@ function handleBackClick() {
     <div class="mobile__foot__menu" @click="handleBackClick()">
       <el-icon class="mobile__foot__icon">
         <ArrowLeftBold />
+      </el-icon>
+    </div>
+    <!-- 前进功能已经写好, 根据需求再开启 -->
+    <div class="mobile__foot__menu" @click="handleForwardClick()" style="display: none;">
+      <el-icon class="mobile__foot__icon">
+        <ArrowRightBold />
       </el-icon>
     </div>
 
@@ -77,5 +108,8 @@ function handleBackClick() {
   width: 26px;
   height: 26px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
