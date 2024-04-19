@@ -91,7 +91,8 @@ const closeOtherTabs = () => {
   <div class="route-tabs">
     <el-tabs :model-value="route.fullPath" type="card" editable @tab-change="handleTabChange"
       @tab-remove="handleTabRemove" class="route-tabs__left">
-      <el-tab-pane v-for="item in keepAliveList" :key="item.name" :name="item.fullPath">
+      <el-tab-pane v-for="item in keepAliveList.filter(item => item.fullPath.includes('admin'))" :key="item.name"
+        :name="item.fullPath">
         <template #label>
           <div class="rt-el-tabs__item--tips"></div>
           <div class="rt-el-tabs__item">{{ item.meta.title }}</div>
