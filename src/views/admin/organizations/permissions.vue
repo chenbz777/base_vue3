@@ -34,6 +34,8 @@ const getFormData = () => {
 
 const formData = ref(getFormData());
 
+const tableProRef = ref();
+
 const tableConfig = [
   {
     label: '权限名称',
@@ -78,8 +80,20 @@ function handleEdit(data) {
   dialogVisible.value = true;
 }
 
-function handleDelete(data) {
-  api.permissions.remove(data.id).then(() => {
+function handleDestroy(data) {
+  api.permissions.destroy(data.id).then(() => {
+    getList();
+  });
+}
+
+function handleDestroyBatch() {
+  const ids = tableProRef.value.multipleSelection.map(item => item.id);
+
+  if (!ids.length) {
+    return;
+  }
+
+  api.permissions.destroyBatch({ ids }).then(() => {
     getList();
   });
 }
@@ -97,11 +111,12 @@ function submit(data) {
 <template>
   <div>
     <el-button type="success" @click="handleAdd()">新增</el-button>
+    <el-button type="danger" @click="handleDestroyBatch()">批量删除</el-button>
 
     <el-divider />
 
-    <TablePro :tableConfig="tableConfig" :tableData="tableData" :total="total" @edit="handleEdit" @delete="handleDelete"
-      @paginationChange="getList" />
+    <TablePro :tableConfig="tableConfig" :tableData="tableData" :total="total" @edit="handleEdit"
+      @delete="handleDestroy" @paginationChange="getList" :openSelection="true" ref="tableProRef" />
 
     <el-dialog v-model="dialogVisible" :title="formData.id ? '编辑' : '新增'" width="600" destroy-on-close>
       <FormPro :formConfig="formConfig" :formData="formData" :showCancelBtn="true" :showResetBtn="false"

@@ -11,16 +11,21 @@ function update(data) {
 }
 
 // 删除权限
-function remove(id) {
+function destroy(id) {
   return request.delete(`/permissions/${id}`);
 }
 
-// 获取权限列表
+// 批量删除
+function destroyBatch(data) {
+  return request.post('/permissions/destroyBatch', data);
+}
+
+// 获取列表
 function list(data) {
   return request.get('/permissions', data);
 }
 
-// 获取权限详情
+// 获取详情
 function detail(data) {
   return request.get(`/permissions/${data.id}`, data);
 }
@@ -28,7 +33,8 @@ function detail(data) {
 export default {
   create,
   update,
-  remove,
+  destroy,
+  destroyBatch,
   list,
   detail
 };
