@@ -171,11 +171,11 @@ defineExpose({
 
       <el-table-column fixed="right" label="操作" :width="operationsWidth" v-if="operationsWidth">
         <template #default="scope">
-          <slot name="operations" :data="scope.row"></slot>
+          <slot name="operations" :data="JSON.parse(JSON.stringify(scope.row))"></slot>
 
-          <el-button type="primary" text @click="handleEdit(scope.row, scope.$index)"
+          <el-button type="primary" text @click="handleEdit(JSON.parse(JSON.stringify(scope.row)), scope.$index)"
             v-if="props.showEditBtn">编辑</el-button>
-          <el-button type="danger" text @click="handleDelete(scope.row, scope.$index)"
+          <el-button type="danger" text @click="handleDelete(JSON.parse(JSON.stringify(scope.row)), scope.$index)"
             v-if="props.showDeleteBtn">删除</el-button>
         </template>
       </el-table-column>
