@@ -82,11 +82,11 @@ const routes = [
         }
       },
       {
-        path: 'home2/:id',
-        name: 'adminHome2',
-        component: () => import('@/views/admin/home2.vue'),
+        path: 'permissions',
+        name: 'permissions',
+        component: () => import('@/views/admin/organizations/permissions.vue'),
         meta: {
-          title: '仪表盘2',
+          title: '权限管理',
           keepAlive: true
         }
       },

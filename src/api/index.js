@@ -1,6 +1,5 @@
-
-import demo from './modules/demo';
+import permissions from './modules/permissions';
 
 export default {
-  demo
+  permissions
 };

@@ -11,34 +11,16 @@ const adminMenuData = [
     icon: 'Files'
   },
   {
-    name: '仪表盘2',
-    path: '/admin/home2/2',
-    icon: 'Files'
-  },
-  {
-    name: '仪表盘3',
-    path: '/admin/home2/3',
-    icon: 'Files'
+    name: '组织架构',
+    path: '/admin/organizational',
+    icon: 'User',
+    children: [
+      {
+        name: '权限管理',
+        path: '/admin/permissions'
+      }
+    ]
   }
-  // {
-  //   name: '组织架构',
-  //   path: '/admin/organizational',
-  //   icon: 'User',
-  //   children: [
-  //     {
-  //       name: '人员管理',
-  //       path: '/admin/organizational/personnelManage'
-  //     },
-  //     {
-  //       name: '部门管理',
-  //       path: '/admin/organizational/departmentManage'
-  //     },
-  //     {
-  //       name: '角色权限',
-  //       path: '/admin/organizational/roleManage'
-  //     }
-  //   ]
-  // }
 ];
 
 const store = useMenu();
