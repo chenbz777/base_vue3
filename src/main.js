@@ -20,6 +20,8 @@ import 'animate.css';
 // 引入全局组件
 import AnimateTransition from '@/components/AnimateTransition.vue';
 import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';
+import TablePro from '@/components/TablePro.vue';
+import FormPro from '@/components/FormPro.vue';
 
 const pinia = createPinia();
 
@@ -31,6 +33,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 app.component('AnimateTransition', AnimateTransition);
 app.component('AnimateTransitionGroup', AnimateTransitionGroup);
+app.component('TablePro', TablePro);
+app.component('FormPro', FormPro);
 
 app.use(pinia);
 app.use(router);
