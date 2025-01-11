@@ -13,14 +13,16 @@
     "@element-plus/icons-vue": "^2.3.1",
     "animate.css": "^4.1.1",
     "axios": "^1.6.7",
-    "element-plus": "^2.6.1",
+    "element-plus": "^2.9.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "qs": "^6.12.0",
+    "vant": "^4.8.11",
     "vue": "^3.3.4",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@vant/auto-import-resolver": "^1.2.1",
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",

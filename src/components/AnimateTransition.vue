@@ -38,6 +38,6 @@ const animationClassData = {
 
 <style scoped>
 .enter--bounce {
-  animation-duration: 0.5s;
+  animation-duration: 0.35s;
 }
 </style>

@@ -1,0 +1,47 @@
+<script setup>
+</script>
+
+<template>
+  <div class="mobile-base-head">
+    <div class="mobile-base-head__tool">
+      <slot name="left" />
+    </div>
+
+    <div class="mobile__head__content">
+      <slot />
+    </div>
+
+    <div class="mobile-base-head__tool mobile-base-head__tool--right">
+      <slot name="right" />
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.mobile-base-head {
+  height: 44px;
+  padding: 6px 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: #eaeaea;
+  display: flex;
+  align-items: center;
+}
+
+.mobile__head__content {
+  flex: 2;
+  width: 0;
+  text-align: center;
+}
+
+.mobile-base-head__tool {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-base-head__tool--right {
+  justify-content: flex-end;
+}
+</style>

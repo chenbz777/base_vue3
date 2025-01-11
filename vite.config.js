@@ -5,6 +5,8 @@ import viteCompression from 'vite-plugin-compression';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { VantResolver } from '@vant/auto-import-resolver';
+
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -17,10 +19,10 @@ export default defineConfig(({ mode }) => {
         // deleteOriginFile: true  // 压缩后是否删除源文件
       }),
       AutoImport({
-        resolvers: [ElementPlusResolver()]
+        resolvers: [ElementPlusResolver(), VantResolver()]
       }),
       Components({
-        resolvers: [ElementPlusResolver()]
+        resolvers: [ElementPlusResolver(), VantResolver()]
       })
     ],
     server: { // 开发服务器配置

@@ -1,15 +1,15 @@
 // 网页局部全屏
-const localFullScreen = (elementId) => {
+function localFullScreen(elementId) {
   const element = document.getElementById(elementId);
   element.classList.toggle('g-local-full-screen');  // 切换类名状态
-};
+}
 
 /**
  * @author: chenbz
  * @description: 获取url参数
  * @return {*}
  */
-const getParameter = () => {
+function getParameter() {
   const query = location.search.substring(1);
   const vars = query.split('&');
 
@@ -22,34 +22,34 @@ const getParameter = () => {
   });
 
   return temp;
-};
+}
 
-const setPageTitle = (title) => {
+function setPageTitle(title) {
   if (!title) {
 
     return false;
   }
 
   document.title = title;
-};
+}
 
-const goTop = (top = 0) => {
+function goTop(top = 0) {
   window.scrollTo({
     top,
     behavior: 'smooth'
   });
-};
+}
 
-const isMobile = () => {
+function isMobile() {
 
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-};
+}
 
-const isWx = () => {
+function isWx() {
   return /MicroMessenger/i.test(window.navigator.userAgent);
-};
+}
 
-const copyText = (text) => {
+function copyText(text) {
   if (!text) {
     return false;
   }
@@ -67,7 +67,7 @@ const copyText = (text) => {
   document.body.removeChild(input);
 
   return copy;
-};
+}
 
 /**
  * @author: chenbz
@@ -75,7 +75,7 @@ const copyText = (text) => {
  * @param {string} text 文本
  * @return {string} 富文本
  */
-const convertToRichText = (text) => {
+function convertToRichText(text) {
   // 检查文本中是否包含转译字符
   if (text.includes('&lt;') || text.includes('&gt;')) {
     // 使用正则表达式进行转换
@@ -87,7 +87,7 @@ const convertToRichText = (text) => {
     // 如果文本中不包含转译字符，直接返回原文本
     return text;
   }
-};
+}
 
 /**
  * @author: chenbz
@@ -96,7 +96,7 @@ const convertToRichText = (text) => {
  * @param {Array} replacements 替换的标签
  * @return {string} 替换后的html字符串
  */
-const replaceHtmlTags = (html, replacements) => {
+function replaceHtmlTags(html, replacements) {
 
   if (!html) { return ''; }
 
@@ -194,7 +194,34 @@ const replaceHtmlTags = (html, replacements) => {
   }
 
   return html;
-};
+}
+
+function hexToRgb(hex) {
+  // 移除可能的 '#' 符号
+  hex = hex.replace('#', '');
+
+  // 解析十六进制颜色为 RGB
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  // 返回 RGB 对象
+  return { r, g, b };
+}
+
+function hexToRgba(hex, alpha = 1) {
+  // 解析十六进制颜色为 RGB
+  const { r, g, b } = hexToRgb(hex);
+
+  // 返回 rgba 字符串
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function getTextColor(backgroundColor) {
+  const rgb = hexToRgb(backgroundColor);
+  const brightness = rgb.r * 0.299 + rgb.g * 0.587 + rgb.b * 0.114;
+  return brightness > 186 ? '#000000' : '#FFFFFF'; // 186 是常用的阈值
+}
 
 export default {
   localFullScreen,
@@ -205,5 +232,8 @@ export default {
   isWx,
   copyText,
   replaceHtmlTags,
-  convertToRichText
+  convertToRichText,
+  hexToRgb,
+  hexToRgba,
+  getTextColor
 };
