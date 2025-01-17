@@ -1,13 +1,31 @@
 <script setup>
+defineProps({
+  isPage: {
+    type: Boolean,
+    default: false
+  },
+  height: {
+    type: String,
+    default: 'auto'
+  }
+});
 </script>
 
 <template>
-  <div class="bc">
+  <div class="bc" :class="{ 'bc--page': isPage }" :style="{ height }">
     <div class="bc__head">
       <slot name="head" />
     </div>
-    <div class="bc__content">
-      <slot />
+    <div class="bc__container">
+      <div class="bc__container__left">
+        <slot name="left" />
+      </div>
+      <div class="bc__container__content">
+        <slot />
+      </div>
+      <div class="bc__container__right">
+        <slot name="right" />
+      </div>
     </div>
     <div class="bc__foot">
       <slot name="foot" />
@@ -21,7 +39,9 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}
 
+.bc--page {
   padding-left: constant(safe-area-inset-left);
   padding-left: env(safe-area-inset-left);
 
@@ -30,6 +50,9 @@
 
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
+
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .bc__head {
@@ -37,17 +60,49 @@
   position: relative;
 }
 
-.bc__content {
+.bc__container {
+  box-sizing: border-box;
   flex: 1;
   height: 0;
+  display: flex;
+}
+
+.bc__container__left {
+  box-sizing: border-box;
+  height: 100%;
   overflow: auto;
   position: relative;
+}
+
+.bc__container__content {
+  flex: 1;
+  width: 0;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.bc__container__right {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+.bc__container__content::-webkit-scrollbar {
+  display: none;
+}
+
+.bc__container__left::-webkit-scrollbar {
+  display: none;
+}
+
+.bc__container__right::-webkit-scrollbar {
+  display: none;
 }
 
 .bc__foot {
   box-sizing: border-box;
   position: relative;
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
 }
 </style>
