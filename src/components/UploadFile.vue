@@ -89,6 +89,9 @@ async function handleChange(file, fileList) {
   file = file.raw;
 
   if (!await handleBeforeUpload(file)) {
+    // 删除文件
+    fileList.splice(fileList.findIndex(item => item.uid === file.uid), 1);
+
     return;
   }
 
@@ -280,7 +283,7 @@ function getFileIcon(fileName) {
       </div>
     </div>
 
-    <el-upload v-model:file-list="fileList" :limit="option.uploadLimit" :before-upload="handleBeforeUpload"
+    <el-upload v-model:file-list="fileList" :limit="option.uploadLimit"
       :disabled="disabled || (fileList.length >= option.uploadLimit)" :show-file-list="false" :on-change="handleChange"
       :auto-upload="false">
       <div class="questionnaire__btn" :class="{
