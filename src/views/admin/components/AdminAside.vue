@@ -1,8 +1,9 @@
 <script setup>
 import Menu from './Menu.vue';
-import { useMenu } from '@/stores';
+import useMenu from '@/hooks/useMenu';
 
-const store = useMenu();
+
+const { showTitle, title } = useMenu();
 </script>
 
 <template>
@@ -11,7 +12,7 @@ const store = useMenu();
       <el-icon :size="30">
         <ElementPlus />
       </el-icon>
-      <span v-show="store.showTitle">{{ store.title }}</span>
+      <span v-show="showTitle">{{ title }}</span>
     </div>
 
     <Menu class="admin__aside__menu" />

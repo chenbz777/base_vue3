@@ -2,10 +2,10 @@
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import utils from '@/utils';
-import { useMenu } from '@/stores';
 import useRouterPlus from '@/hooks/useRouterPlus';
 import ThemeConfig from './headModule/ThemeConfig.vue';
-
+import useMenu from '@/hooks/useMenu';
+import useUserInfo from '@/hooks/useUserInfo';
 
 const router = useRouter();
 const route = useRoute();
@@ -14,11 +14,9 @@ const themeConfigRef = ref(null);
 
 const { getRoutesData } = useRouterPlus();
 
-const store = useMenu();
+const { toggleCollapse, isOpen } = useMenu();
 
-const userInfo = ref(Object.assign({
-  username: '默认用户'
-}, utils.localStorage.get('userInfo')));
+const { userInfo } = useUserInfo();
 
 const { routesMap } = getRoutesData();
 
@@ -43,8 +41,8 @@ const toggleFullScreen = () => {
 <template>
   <div class="main__head">
     <div class="main__head__left">
-      <el-icon @click="store.toggleCollapse" :size="20" class="main__head__left__icon">
-        <Fold v-if="store.isOpen" />
+      <el-icon @click="toggleCollapse" :size="20" class="main__head__left__icon">
+        <Fold v-if="isOpen" />
         <Expand v-else />
       </el-icon>
 
