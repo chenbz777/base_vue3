@@ -23,10 +23,7 @@ const formConfig = [
     label: '输入框',
     key: 'input',
     type: 'input',
-    required: true,
-    props: {
-      textFormat: '邮箱'
-    }
+    required: true
   },
   {
     label: '多行输入框',
@@ -56,49 +53,49 @@ const formConfig = [
     label: '时间',
     key: 'time',
     type: 'time',
-    required: true
+    required: false
   },
   {
     label: '时间范围',
     key: 'timeToTime',
     type: 'timeToTime',
-    required: true
+    required: false
   },
   {
     label: '日期',
     key: 'date',
     type: 'date',
-    required: true
+    required: false
   },
   {
     label: '日期范围',
     key: 'dateToDate',
     type: 'dateToDate',
-    required: true
+    required: false
   },
   {
     label: '日期时间',
     key: 'dateTime',
     type: 'dateTime',
-    required: true
+    required: false
   },
   {
     label: '日期时间范围',
     key: 'dateTimeToDateTime',
     type: 'dateTimeToDateTime',
-    required: true
+    required: false
   },
   {
     label: '文件',
     key: 'uploadFile',
     type: 'uploadFile',
-    required: true
+    required: false
   },
   {
     label: '单选',
     key: 'radio',
     type: 'radio',
-    required: true,
+    required: false,
     props: {
       options,
       key: 'value',
@@ -110,7 +107,7 @@ const formConfig = [
     label: '多选框',
     key: 'checkbox',
     type: 'checkbox',
-    required: true,
+    required: false,
     props: {
       options,
       key: 'value',
@@ -122,7 +119,7 @@ const formConfig = [
     label: '下拉框',
     key: 'select',
     type: 'select',
-    required: true,
+    required: false,
     props: {
       options,
       key: 'value',
@@ -134,7 +131,7 @@ const formConfig = [
     label: '下拉多选框',
     key: 'selectMultiple',
     type: 'selectMultiple',
-    required: true,
+    required: false,
     props: {
       options,
       key: 'value',
@@ -149,16 +146,11 @@ const operationConfig = [
     text: '提交',
     type: 'primary',
     clickFn: (data) => {
-      const { formRef, getFormData } = data;
-      console.log(getFormData());
+      const { validateSuccess } = data;
 
-      formRef.value.validate((valid) => {
-        if (valid) {
-          console.log('校验通过');
-        } else {
-          console.log('校验失败');
-          return false;
-        }
+      validateSuccess((myFormData) => {
+        console.log('校验通过');
+        console.log('myFormData: ', myFormData);
       });
     }
   }

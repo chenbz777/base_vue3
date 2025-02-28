@@ -5,8 +5,6 @@ import { ElMessage } from 'element-plus';
 import UploadFile from '@/components/UploadFile.vue';
 
 
-const emit = defineEmits(['update:formData']);
-
 // 插槽对象
 const slots = useSlots();
 
@@ -96,18 +94,97 @@ myFormConfig.value.forEach(item => {
  * end 初始化表单校验规则
  */
 
+
+// 扁平化对象：将嵌套对象转化为 'parent.child' 的形式
+function flattenObject(obj, prefix = '') {
+  // 存储最终结果的扁平对象
+  let result = {};
+
+  // 遍历当前对象的所有可枚举属性
+  for (const key in obj) {
+    // 安全检测：确保只处理对象自身的属性（跳过原型链属性）
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+
+      /* 键名生成逻辑 */
+      // 当前属性路径：如果有前缀则拼接，否则直接使用当前键
+      // 示例：prefix='parent', key='child' => 'parent.child'
+      const newKey = prefix ? `${prefix}.${key}` : key;
+
+      // 获取当前属性值
+      const value = obj[key];
+
+      /* 值处理逻辑 */
+      if (typeof value === 'object' && value !== null) {
+        // 递归情况：值为对象/数组时继续深层扁平化
+        // 使用 Object.assign 合并深层扁平化结果到当前结果集
+        Object.assign(
+          result,
+          flattenObject(value, newKey) // 递归时传递拼接后的新键名作为前缀
+        );
+      } else {
+        // 基础情况：原始值直接存入结果对象
+        result[newKey] = value;
+      }
+    }
+  }
+
+  return result;
+}
+
+// 恢复扁平对象：将扁平对象转化为嵌套对象
+function unfastenObject(flatObj) {
+  const result = {};
+
+  for (const [key, value] of Object.entries(flatObj)) {
+    const path = key.split('.');
+    let current = result;
+
+    for (let i = 0; i < path.length; i++) {
+      const part = path[i];
+      const isLast = i === path.length - 1;
+
+      // 更严格的数组索引检测逻辑
+      let isNextPartArrayIndex = false;
+      if (!isLast) {
+        const nextPart = path[i + 1];
+        const num = Number(nextPart);
+
+        // 同时满足：
+        // 1. 是有效数字
+        // 2. 是非负整数
+        // 3. 数字的字符串形式与原字符串严格一致（避免前导零等问题）
+        isNextPartArrayIndex = (
+          !isNaN(num) &&                     // 是有效数字
+          Number.isInteger(num) &&           // 是整数
+          num >= 0 &&                        // 非负
+          num <= 4294967295 &&               // 在数组最大索引范围内
+          String(num) === nextPart           // 严格匹配格式
+        );
+      }
+
+      if (!isLast) {
+        if (current[part] === undefined) {
+          // 根据下一层级是否为数组索引，决定创建数组或对象
+          current[part] = isNextPartArrayIndex ? [] : {};
+        }
+        current = current[part];
+      } else {
+        current[part] = value;
+      }
+    }
+  }
+
+  return result;
+}
+
 /**
  * 初始化表单数据
  */
+
 const myFormData = ref({});
 
-function getFormData() {
-  return JSON.parse(JSON.stringify(myFormData.value));
-}
-
 function initFormData() {
-
-  myFormData.value = props.formData;
+  myFormData.value = flattenObject(props.formData);
 
   const myFormDataKeys = Object.keys(myFormData.value);
 
@@ -119,13 +196,11 @@ function initFormData() {
   });
 }
 
-initFormData();
-
-watch(() => myFormData.value, (value) => {
-  emit('update:formData', value);
+watch(() => props.formData, (value) => {
+  initFormData();
 }, {
-  immediate: true,
-  deep: true
+  deep: true,
+  immediate: true
 });
 /**
  * end 初始化表单数据
@@ -147,9 +222,24 @@ class Operation {
   }
 }
 
+// 获取表单数据
+function getFormData() {
+  return unfastenObject(myFormData.value);
+}
+
+// 校验成功后执行回调
+function validateSuccess(callbackFn) {
+  formRef.value.validate((valid) => {
+    if (valid) {
+      callbackFn(getFormData());
+    }
+  });
+}
+
 const defineExposeData = {
   formRef,
-  getFormData
+  getFormData,
+  validateSuccess
 };
 
 const operationList = props.operationConfig.map(item => new Operation(item));
