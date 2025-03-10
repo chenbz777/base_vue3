@@ -232,14 +232,26 @@ function getTextColor(backgroundColor) {
  * @param {String} data.name - 地点名称
  * @param {String} data.address - 地点地址
  * @param {String} data.mapType - 地图类型: 'gaode' | 'baidu'
+ * @param {Boolean} data.isNewWindow - 是否新窗口打开
  */
 function navigateToMap(data = {}) {
-  let { latitude, longitude, name, address, mapType = 'gaode' } = data;
+  let { latitude,
+    longitude,
+    name,
+    address,
+    mapType = 'gaode',
+    isNewWindow = false
+  } = data;
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const isAndroid = /Android/i.test(navigator.userAgent);
   const isWechat = /MicroMessenger/i.test(navigator.userAgent);
 
+  if (!name) {
+    name = address;
+  }
+
+  name = encodeURIComponent(name);
   address = encodeURIComponent(address);
 
   if (!['gaode', 'baidu'].includes(mapType)) {
@@ -258,12 +270,12 @@ function navigateToMap(data = {}) {
       protocol = 'amapuri://route/plan';
     }
 
-    protocol = `${protocol}?sourceApplication=applicationName&dlat=${latitude}&dlon=${longitude}&dname=${address}&dev=0&t=0`;
+    protocol = `${protocol}?sourceApplication=applicationName&dlat=${latitude}&dlon=${longitude}&dname=${name}&dev=0&t=0`;
 
     // 微信浏览器无法唤起app, 降级方案 => 跳转到高德地图H5页面
     if (isWechat) {
       // 官方文档: https://lbs.amap.com/api/uri-api/guide/mobile-web/points
-      protocol = `//uri.amap.com/marker?markers=${longitude},${latitude},${address}&src=mypage&callnative=0`;
+      protocol = `//uri.amap.com/marker?markers=${longitude},${latitude},${name}&src=mypage&callnative=0`;
     }
   }
 
@@ -277,16 +289,20 @@ function navigateToMap(data = {}) {
       protocol = 'bdapp://map/direction';
     }
 
-    protocol = `${protocol}?destination=name:${address}|latlng:${latitude},${longitude}&mode=driving&src=ios.baidu.openAPIdemo`;
+    protocol = `${protocol}?destination=name:${name}|latlng:${latitude},${longitude}&mode=driving&src=ios.baidu.openAPIdemo`;
 
     // 微信浏览器无法唤起app, 降级方案 => 跳转到百度地图H5页面
     if (isWechat) {
       // 官方文档: https://lbsyun.baidu.com/faq/api?title=webapi/uri/web
-      protocol = `//api.map.baidu.com/marker?location=${latitude},${longitude}&title=${name || address}&content=${address}&output=html&src=webapp.baidu.openAPIdemo`;
+      protocol = `//api.map.baidu.com/marker?location=${latitude},${longitude}&title=${name}&content=${address}&output=html&src=webapp.baidu.openAPIdemo`;
     }
   }
 
-  window.location.href = protocol;
+  if (isNewWindow) {
+    window.open(protocol, '_blank');
+  } else {
+    window.location.href = protocol;
+  }
 }
 
 export default {
