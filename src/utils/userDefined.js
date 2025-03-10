@@ -223,6 +223,72 @@ function getTextColor(backgroundColor) {
   return brightness > 186 ? '#000000' : '#FFFFFF'; // 186 是常用的阈值
 }
 
+/**
+ * @author: chenbz
+ * @description: 跳转到地图导航
+ * @param {Object} data
+ * @param {Number} data.latitude - 纬度
+ * @param {Number} data.longitude - 经度
+ * @param {String} data.name - 地点名称
+ * @param {String} data.address - 地点地址
+ * @param {String} data.mapType - 地图类型: 'gaode' | 'baidu'
+ */
+function navigateToMap(data = {}) {
+  let { latitude, longitude, name, address, mapType = 'gaode' } = data;
+
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const isWechat = /MicroMessenger/i.test(navigator.userAgent);
+
+  address = encodeURIComponent(address);
+
+  if (!['gaode', 'baidu'].includes(mapType)) {
+    console.error('mapType参数错误');
+    return;
+  }
+
+  let protocol = '';
+
+  if (mapType === 'gaode') {
+    if (isIOS) {
+      // 官方文档: https://lbs.amap.com/api/amap-mobile/guide/ios/route
+      protocol = 'iosamap://path';
+    } else if (isAndroid) {
+      // 官方文档: https://lbs.amap.com/api/amap-mobile/guide/android/route
+      protocol = 'amapuri://route/plan';
+    }
+
+    protocol = `${protocol}?sourceApplication=applicationName&dlat=${latitude}&dlon=${longitude}&dname=${address}&dev=0&t=0`;
+
+    // 微信浏览器无法唤起app, 降级方案 => 跳转到高德地图H5页面
+    if (isWechat) {
+      // 官方文档: https://lbs.amap.com/api/uri-api/guide/mobile-web/points
+      protocol = `//uri.amap.com/marker?markers=${longitude},${latitude},${address}&src=mypage&callnative=0`;
+    }
+  }
+
+  if (mapType === 'baidu') {
+
+    if (isIOS) {
+      // 官方文档: https://lbsyun.baidu.com/faq/api?title=webapi/uri/ios
+      protocol = 'baidumap://map/direction';
+    } else if (isAndroid) {
+      // 官方文档: https://lbsyun.baidu.com/faq/api?title=webapi/uri/andriod
+      protocol = 'bdapp://map/direction';
+    }
+
+    protocol = `${protocol}?destination=name:${address}|latlng:${latitude},${longitude}&mode=driving&src=ios.baidu.openAPIdemo`;
+
+    // 微信浏览器无法唤起app, 降级方案 => 跳转到百度地图H5页面
+    if (isWechat) {
+      // 官方文档: https://lbsyun.baidu.com/faq/api?title=webapi/uri/web
+      protocol = `//api.map.baidu.com/marker?location=${latitude},${longitude}&title=${name || address}&content=${address}&output=html&src=webapp.baidu.openAPIdemo`;
+    }
+  }
+
+  window.location.href = protocol;
+}
+
 export default {
   localFullScreen,
   getParameter,
@@ -235,5 +301,6 @@ export default {
   convertToRichText,
   hexToRgb,
   hexToRgba,
-  getTextColor
+  getTextColor,
+  navigateToMap
 };
