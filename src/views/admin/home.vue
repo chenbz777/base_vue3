@@ -29,12 +29,9 @@ const formConfig = [
     label: '多行输入框',
     key: 'textarea',
     type: 'textarea',
-    required: true,
+    required: false,
     props: {
       textFormat: '邮箱'
-    },
-    showFn: (_formData) => {
-      return _formData.input === '1';
     }
   },
   {
@@ -59,7 +56,11 @@ const formConfig = [
     label: '时间范围',
     key: 'timeToTime',
     type: 'timeToTime',
-    required: false
+    required: false,
+    props: {
+      startKey: 'startTime',
+      endKey: 'endTime'
+    }
   },
   {
     label: '日期',

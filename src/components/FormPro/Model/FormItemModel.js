@@ -167,12 +167,14 @@ class FormTimeToTime extends FormItemProps {
       clearable: true,
       startPlaceholder: '开始时间',
       endPlaceholder: '结束时间',
-      rangeSeparator: '至'
+      rangeSeparator: '至',
+      startKey: '',
+      endKey: ''
     };
   }
 
   getDefaultValue() {
-    return [date.getTime(), date.getTime()];
+    return [];
   }
 
   getText(value = []) {
@@ -210,12 +212,14 @@ class FormDateToDate extends FormItemProps {
       clearable: true,
       startPlaceholder: '开始日期',
       endPlaceholder: '结束日期',
-      rangeSeparator: '至'
+      rangeSeparator: '至',
+      startKey: '',
+      endKey: ''
     };
   }
 
   getDefaultValue() {
-    return [date.getDate(), date.getDate()];
+    return [];
   }
 
   getText(value = []) {
@@ -253,12 +257,14 @@ class FormDateTimeToDateTime extends FormItemProps {
       clearable: true,
       startPlaceholder: '开始日期时间',
       endPlaceholder: '结束日期时间',
-      rangeSeparator: '至'
+      rangeSeparator: '至',
+      startKey: '',
+      endKey: ''
     };
   }
 
   getDefaultValue() {
-    return [date.getDateTime(), date.getDateTime()];
+    return [];
   }
 
   getText(value = []) {
@@ -456,7 +462,6 @@ class FormTypeFactory {
 class FormItem {
 
   constructor(formItem = {}) {
-
     Object.assign(this, {
       key: 'default',
       label: '默认标题',
@@ -465,6 +470,8 @@ class FormItem {
       required: false,
       showFn: (formData) => {
         return true;
+      },
+      onChange: (newValue) => {
       }
     }, formItem);
 
