@@ -3,8 +3,6 @@ import App from './App.vue';
 import router from './router';  // 路由
 import 'animate.css';  // 引入animate动画样式
 import 'element-plus/dist/index.css';
-import config from './config';  // 配置文件
-console.log('config: ', config);
 
 
 const app = createApp(App);
