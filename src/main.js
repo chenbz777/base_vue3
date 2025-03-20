@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { createPinia } from 'pinia';
 import router from './router';  // 路由
 import 'animate.css';  // 引入animate动画样式
 import FormPro from '@/components/FormPro/index.vue';
@@ -9,15 +8,9 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import 'element-plus/dist/index.css';
 
 
-// 创建 Pinia 实例
-const pinia = createPinia();
-
 // 创建应用实例
 const app = createApp(App);
 
-// 使用 Pinia
-app.use(pinia);
-// 使用路由
 app.use(router);
 
 // 自动导入并注册 `components` 文件夹下的所有 `.vue` 文件
