@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { useMenu } from '@/stores';
+import useMenu from '@/hooks/useMenu/index.js';
 import useAnimate from '@/hooks/useAnimate/index.js';
 
-const store = useMenu();
+const { title } = useMenu();
 
 const formRef = ref();
 
@@ -47,7 +47,7 @@ const login = () => {
   <div class="login">
     <div class="login__content">
       <div class="login__content__title">
-        {{ store.title }}
+        {{ title }}
       </div>
 
       <div class="login__content__card">
