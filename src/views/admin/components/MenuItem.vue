@@ -33,7 +33,7 @@ const props = defineProps({
 
 <style scoped>
 :deep(.el-sub-menu__title) {
-  border-radius: var(--theme-border-radius);
+  border-radius: var(--br-s);
   height: 46px !important;
 }
 
@@ -48,7 +48,7 @@ const props = defineProps({
 
 .el-menu-item {
   margin: 3px 0;
-  border-radius: var(--theme-border-radius);
+  border-radius: var(--br-s);
   height: 46px !important;
 }
 

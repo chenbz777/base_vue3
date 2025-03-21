@@ -24,7 +24,7 @@ const themeMap = {
   themeRegularText: '--theme-regular-text',
   themeSecondaryText: '--theme-secondary-text',
   themeBaseBorder: '--theme-base-border',
-  themeBorderRadius: '--theme-border-radius'
+  themeBorderRadius: '--br-s'
 };
 
 function confirm() {

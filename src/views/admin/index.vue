@@ -77,7 +77,7 @@ const { adminKeepAliveList, formatComponentInstance } = useRouterPlus();
 .admin__main__content__body {
   padding: 20px;
   background-color: var(--theme-page-bg);
-  border-radius: var(--theme-border-radius);
+  border-radius: var(--br-s);
   box-shadow: 0px 1px 2px 0px rgba(19, 51, 107, 0.10),
     0px 0px 1px 0px rgba(19, 51, 107, 0.15);
 }
