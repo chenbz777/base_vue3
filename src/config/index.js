@@ -1,9 +1,19 @@
 import configDefault from './config.default';
+import configProd from './config.prod';
+import configDev from './config.dev';
 
 
 const importModules = import.meta.glob('./*.js', { eager: true });
 
 const config = configDefault;
+
+if (process.env.NODE_ENV === 'development') {
+  Object.assign(config, configDev);
+}
+
+if (process.env.NODE_ENV === 'production') {
+  Object.assign(config, configProd);
+}
 
 for (const path in importModules) {
   const module = importModules[path];
