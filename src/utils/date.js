@@ -1,5 +1,17 @@
 'use strict';
 
+function handleTime(time) {
+  if (!time) {
+    return new Date();
+  }
+
+  if (!(time instanceof Date)) {
+    return new Date(time);
+  }
+
+  return time;
+}
+
 /**
  * @description 日期格式化
  * @param date {Date} - 时间对象
@@ -7,7 +19,9 @@
  * @author chenbingze
  * @date 2022/3/10
  */
-const getDateToString = (date = new Date(), format = 'yyyy-MM-dd hh:mm:ss') => {
+function getDateToString(date, format = 'yyyy-MM-dd hh:mm:ss') {
+
+  date = handleTime(date);
 
   const o = {
     'M+': date.getMonth() + 1, // 月份
@@ -27,7 +41,7 @@ const getDateToString = (date = new Date(), format = 'yyyy-MM-dd hh:mm:ss') => {
     }
   }
   return format;
-};
+}
 
 /**
  * @description 计算两个时间相差的 => 天、时、分、秒
@@ -36,7 +50,11 @@ const getDateToString = (date = new Date(), format = 'yyyy-MM-dd hh:mm:ss') => {
  * @author chenbingze
  * @date 2022/3/12
  */
-const getTimeDifference = (date1 = new Date(), date2 = new Date()) => {
+function getTimeDifference(date1, date2) {
+
+  date1 = handleTime(date1);
+
+  date2 = handleTime(date2);
 
   const date3 = date2.getTime() - date1.getTime(); // 时间差秒
   // 计算出相差天数
@@ -76,7 +94,7 @@ const getTimeDifference = (date1 = new Date(), date2 = new Date()) => {
     differMinutes,
     differSeconds
   };
-};
+}
 
 /**
  * @description 获取日期时间 yyyy-MM-dd hh:mm:ss
@@ -84,9 +102,11 @@ const getTimeDifference = (date1 = new Date(), date2 = new Date()) => {
  * @author chenbingze
  * @date 2022/3/10
  */
-const getDateTime = (date = new Date()) => {
+function getDateTime(date) {
+  date = handleTime(date);
+
   return getDateToString(date, 'yyyy-MM-dd hh:mm:ss');
-};
+}
 
 /**
  * @description 获取日期 yyyy-MM-dd
@@ -94,9 +114,11 @@ const getDateTime = (date = new Date()) => {
  * @author chenbingze
  * @date 2022/3/10
  */
-const getDate = (date = new Date()) => {
+function getDate(date) {
+  date = handleTime(date);
+
   return getDateToString(date, 'yyyy-MM-dd');
-};
+}
 
 /**
  * @description 获取时间 hh:mm:ss
@@ -104,9 +126,11 @@ const getDate = (date = new Date()) => {
  * @author chenbingze
  * @date 2022/3/10
  */
-const getTime = (date = new Date()) => {
+function getTime(date) {
+  date = handleTime(date);
+
   return getDateToString(date, 'hh:mm:ss');
-};
+}
 
 /**
  * @description 获取时间戳(毫秒级别)
@@ -114,9 +138,11 @@ const getTime = (date = new Date()) => {
  * @author chenbingze
  * @date 2022/3/10
  */
-const getTimestamp = (date = new Date()) => {
+function getTimestamp(date) {
+  date = handleTime(date);
+
   return date.getTime();
-};
+}
 
 /**
  * @description 获取时间戳(秒级别)
@@ -124,10 +150,12 @@ const getTimestamp = (date = new Date()) => {
  * @author chenbingze
  * @date 2022/3/10
  */
-const getTimestamp10 = (date = new Date()) => {
+function getTimestamp10(date) {
+  date = handleTime(date);
+
   const timestamp10 = Math.round(date.getTime() / 1000).toString();
   return timestamp10;
-};
+}
 
 /**
  * @description 获取指定时间前进后退
@@ -136,7 +164,10 @@ const getTimestamp10 = (date = new Date()) => {
  * @author chenbingze
  * @date 2022/3/10
  */
-const getDateShuttle = (shuttle, dateOld = new Date()) => {
+function getDateShuttle(shuttle, dateOld) {
+
+  dateOld = handleTime(dateOld);
+
   const shuttle2 = Object.assign({ y: 0, M: 0, d: 0, h: 0, m: 0, s: 0 }, shuttle);
 
   const date = new Date(dateOld);
@@ -156,7 +187,7 @@ const getDateShuttle = (shuttle, dateOld = new Date()) => {
   date.setSeconds(s);
 
   return date;
-};
+}
 
 export default {
   getDateToString,
