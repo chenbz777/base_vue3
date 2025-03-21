@@ -1,0 +1,17 @@
+:root {
+  --m-s: 6px;
+  --m-m: 12px;
+  --m-l: 24px;
+
+  --p-s: 6px;
+  --p-m: 12px;
+  --p-l: 24px;
+
+  --br-s: 6px;
+  --br-m: 12px;
+  --br-l: 24px;
+
+  --fs-s: 12px;
+  --fs-m: 16px;
+  --fs-l: 24px;
+}
