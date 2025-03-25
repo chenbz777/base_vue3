@@ -30,14 +30,14 @@ function mergeObjects(data1, data2) {
  * 优先级：域名配置 > 生产配置 > 开发配置 > 默认配置
  */
 
-const config = configDefault;
+let config = configDefault;
 
 if (process.env.NODE_ENV === 'development') {
-  mergeObjects(config, configDev);
+  config = mergeObjects(config, configDev);
 }
 
 if (process.env.NODE_ENV === 'production') {
-  mergeObjects(config, configProd);
+  config = mergeObjects(config, configProd);
 }
 
 const importModules = import.meta.glob('./*.js', { eager: true });
@@ -48,7 +48,7 @@ for (const path in importModules) {
   const moduleName = path.split('/').pop().replace('.js', '');
 
   if (moduleName.includes(window.location.hostname)) {
-    mergeObjects(config, module.default);
+    config = mergeObjects(config, module.default);
   }
 }
 
