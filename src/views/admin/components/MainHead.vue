@@ -6,6 +6,8 @@ import useRouterPlus from '@/hooks/useRouterPlus';
 import ThemeConfig from './headModule/ThemeConfig.vue';
 import useMenu from '@/hooks/useMenu';
 import useUserInfo from '@/hooks/useUserInfo';
+import { ArrowDownBold, Brush, Expand, Fold, FullScreen } from '@element-plus/icons-vue';
+
 
 const router = useRouter();
 const route = useRoute();

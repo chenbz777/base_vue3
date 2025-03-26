@@ -1,5 +1,7 @@
 <script setup>
 // import { ref, reactive } from "vue";
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+
 
 const props = defineProps({
   data: {
@@ -14,7 +16,7 @@ const props = defineProps({
   <el-sub-menu v-if="props.data.children && props.data.children.length" :index="props.data.path">
     <template #title>
       <el-icon v-if="props.data.icon">
-        <component :is="props.data.icon"></component>
+        <component :is="ElementPlusIconsVue[props.data.icon]"></component>
       </el-icon>
       <span>{{ props.data.name }}</span>
     </template>
@@ -25,7 +27,7 @@ const props = defineProps({
 
   <el-menu-item v-else :index="props.data.path">
     <el-icon v-if="props.data.icon">
-      <component :is="props.data.icon"></component>
+      <component :is="ElementPlusIconsVue[props.data.icon]"></component>
     </el-icon>
     <span>{{ props.data.name }}</span>
   </el-menu-item>

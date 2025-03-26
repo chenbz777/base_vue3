@@ -1,6 +1,7 @@
 <script setup>
 import Menu from './Menu.vue';
 import useMenu from '@/hooks/useMenu';
+import { ElementPlus } from '@element-plus/icons-vue';
 
 
 const { showTitle, title } = useMenu();

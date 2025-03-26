@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import useMenu from '@/hooks/useMenu/index.js';
 import useAnimate from '@/hooks/useAnimate/index.js';
+import { User, Lock } from '@element-plus/icons-vue';
+
 
 const { title } = useMenu();
 
