@@ -5,6 +5,10 @@ import 'animate.css';  // 引入animate动画样式
 import BaseContainer from '@/components/BaseContainer.vue';  // 引入BaseContainer组件
 import AnimateTransition from '@/components/AnimateTransition.vue';  // 引入AnimateTransition组件
 import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';  // 引入AnimateTransitionGroup组件
+import 'element-plus/dist/index.css';
+import 'vant/lib/index.css';
+import AnimateTransition from '@/components/AnimateTransition.vue';  // 引入AnimateTransition组件
+import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';  // 引入AnimateTransitionGroup组件
 
 
 // 创建应用实例
