@@ -3,18 +3,17 @@ import App from './App.vue';
 import router from './router';  // 路由
 import 'animate.css';  // 引入animate动画样式
 import 'element-plus/dist/index.css';
+import 'vant/lib/index.css';
+import AnimateTransition from '@/components/AnimateTransition.vue';  // 引入AnimateTransition组件
+import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';  // 引入AnimateTransitionGroup组件
 
 
 const app = createApp(App);
 
 app.use(router);
 
-// 自动导入并注册 `components` 文件夹下的所有 `.vue` 文件
-const components = import.meta.glob('@/components/*.vue', { eager: true });
-
-Object.entries(components).forEach(([path, component]) => {
-  const componentName = path.split('/').pop().replace(/\.\w+$/, ''); // 提取文件名作为组件名
-  app.component(componentName, component.default);
-});
+// 注册全局组件
+app.component('AnimateTransition', AnimateTransition);
+app.component('AnimateTransitionGroup', AnimateTransitionGroup);
 
 app.mount('#app');
