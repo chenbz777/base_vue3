@@ -311,7 +311,8 @@ defineExpose(defineExposeData);
             <el-input v-else-if="formItem.type === 'input'" v-model="myFormData[formItem.key]"
               :placeholder="formItem.props.placeholder" :disabled="formItem.props.disabled"
               :maxlength="formItem.props.maxLength" :show-word-limit="formItem.props.showLimit"
-              :clearable="formItem.props.clearable" :style="formItem.props.style" @input="formItem.onChange">
+              :clearable="formItem.props.clearable" :style="formItem.props.style"
+              @input="formItem.onChange($event, { formItem, formData: myFormData })">
               <template #prepend v-if="formItem.props.prefix">{{ formItem.props.prefix }}</template>
               <template #append v-if="formItem.props.suffix">{{ formItem.props.suffix }}</template>
             </el-input>
@@ -321,14 +322,15 @@ defineExpose(defineExposeData);
               :autosize="{ minRows: formItem.props.minRows, maxRows: formItem.props.maxRows }" type="textarea"
               :placeholder="formItem.props.placeholder" :disabled="formItem.props.disabled"
               :show-word-limit="formItem.props.showLimit" :maxlength="formItem.props.maxLength"
-              :clearable="formItem.props.clearable" :style="formItem.props.style" @input="formItem.onChange">
+              :clearable="formItem.props.clearable" :style="formItem.props.style"
+              @input="formItem.onChange($event, { formItem, formData: myFormData })">
             </el-input>
 
             <!-- 数字输入框 -->
             <el-input-number v-else-if="formItem.type === 'number'" v-model="myFormData[formItem.key]"
               :controls-position="formItem.props.controlsPosition" :disabled="formItem.props.disabled"
               :precision="formItem.props.precision" :min="formItem.props.min" :max="formItem.props.max"
-              :style="formItem.props.style" @change="formItem.onChange">
+              :style="formItem.props.style" @change="formItem.onChange($event, { formItem, formData: myFormData })">
               <template #prefix v-if="formItem.props.prefix">
                 {{ formItem.props.prefix }}
               </template>
@@ -339,46 +341,49 @@ defineExpose(defineExposeData);
 
             <!-- 开关 -->
             <el-switch v-else-if="formItem.type === 'switch'" v-model="myFormData[formItem.key]"
-              :disabled="formItem.props.disabled" :style="formItem.props.style" @change="formItem.onChange" />
+              :disabled="formItem.props.disabled" :style="formItem.props.style"
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 时间 -->
             <el-time-picker v-else-if="formItem.type === 'time'" v-model="myFormData[formItem.key]"
               :placeholder="formItem.props.placeholder" :disabled="formItem.props.disabled" format="HH:mm:ss"
               value-format="HH:mm:ss" :clearable="formItem.props.clearable" :style="formItem.props.style"
-              @change="formItem.onChange" />
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 时间 to 时间 -->
             <el-time-picker v-else-if="formItem.type === 'timeToTime'" v-model="myFormData[formItem.key]" is-range
               :range-separator="formItem.props.rangeSeparator" :start-placeholder="formItem.props.startPlaceholder"
               :end-placeholder="formItem.props.endPlaceholder" :disabled="formItem.props.disabled" format="HH:mm:ss"
               value-format="HH:mm:ss" :clearable="formItem.props.clearable" :style="formItem.props.style"
-              @change="formItem.onChange" />
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 日期 -->
             <el-date-picker v-else-if="formItem.type === 'date'" v-model="myFormData[formItem.key]" type="date"
               format="YYYY-MM-DD" value-format="YYYY-MM-DD" :placeholder="formItem.props.placeholder"
               :disabled="formItem.props.disabled" :clearable="formItem.props.clearable" :style="formItem.props.style"
-              @change="formItem.onChange" />
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 日期 to 日期 -->
             <el-date-picker v-else-if="formItem.type === 'dateToDate'" v-model="myFormData[formItem.key]"
               :placeholder="formItem.props.placeholder" type="daterange" format="YYYY-MM-DD" value-format="YYYY-MM-DD"
               :range-separator="formItem.props.rangeSeparator" :start-placeholder="formItem.props.startPlaceholder"
               :end-placeholder="formItem.props.endPlaceholder" :disabled="formItem.props.disabled"
-              :clearable="formItem.props.clearable" :style="formItem.props.style" @change="formItem.onChange" />
+              :clearable="formItem.props.clearable" :style="formItem.props.style"
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 日期时间 -->
             <el-date-picker v-else-if="formItem.type === 'dateTime'" v-model="myFormData[formItem.key]" type="datetime"
               format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss" :placeholder="formItem.props.placeholder"
               :disabled="formItem.props.disabled" :clearable="formItem.props.clearable" :style="formItem.props.style"
-              @change="formItem.onChange" />
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 日期时间 to 日期时间 -->
             <el-date-picker v-else-if="formItem.type === 'dateTimeToDateTime'" v-model="myFormData[formItem.key]"
               type="datetimerange" format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss"
               :range-separator="formItem.props.rangeSeparator" :start-placeholder="formItem.props.startPlaceholder"
               :end-placeholder="formItem.props.endPlaceholder" :disabled="formItem.props.disabled"
-              :clearable="formItem.props.clearable" :style="formItem.props.style" @change="formItem.onChange" />
+              :clearable="formItem.props.clearable" :style="formItem.props.style"
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 上传 -->
             <UploadFile v-else-if="formItem.type === 'uploadFile'" v-model="myFormData[formItem.key]"
@@ -386,7 +391,7 @@ defineExpose(defineExposeData);
 
             <!-- 单选 -->
             <el-radio-group v-else-if="formItem.type === 'radio'" v-model="myFormData[formItem.key]"
-              :style="formItem.props.style" @change="formItem.onChange">
+              :style="formItem.props.style" @change="formItem.onChange($event, { formItem, formData: myFormData })">
               <el-radio v-for="option in formItem.props.options" :key="option[formItem.props.key]"
                 :value="option[formItem.props.value]">
                 {{ option[formItem.props.label] }}
@@ -395,7 +400,7 @@ defineExpose(defineExposeData);
 
             <!-- 多选框 -->
             <el-checkbox-group v-else-if="formItem.type === 'checkbox'" v-model="myFormData[formItem.key]"
-              :style="formItem.props.style" @change="formItem.onChange">
+              :style="formItem.props.style" @change="formItem.onChange($event, { formItem, formData: myFormData })">
               <el-checkbox v-for="option in formItem.props.options" :key="option[formItem.props.key]"
                 :value="option[formItem.props.value]">
                 {{ option[formItem.props.label] }}
@@ -405,7 +410,8 @@ defineExpose(defineExposeData);
             <!-- 下拉单选 -->
             <el-select v-else-if="formItem.type === 'select'" v-model="myFormData[formItem.key]"
               :placeholder="formItem.props.placeholder" :disabled="formItem.props.disabled"
-              :clearable="formItem.props.clearable" :style="formItem.props.style" @change="formItem.onChange">
+              :clearable="formItem.props.clearable" :style="formItem.props.style"
+              @change="formItem.onChange($event, { formItem, formData: myFormData })">
               <el-option v-for="option in formItem.props.options" :key="option[formItem.props.key]"
                 :label="option[formItem.props.label]" :value="option[formItem.props.value]" />
             </el-select>
@@ -413,14 +419,16 @@ defineExpose(defineExposeData);
             <!-- 下拉单选 -->
             <el-select v-else-if="formItem.type === 'selectMultiple'" v-model="myFormData[formItem.key]"
               :multiple="true" :placeholder="formItem.props.placeholder" :disabled="formItem.props.disabled"
-              :clearable="formItem.props.clearable" :style="formItem.props.style" @change="formItem.onChange">
+              :clearable="formItem.props.clearable" :style="formItem.props.style"
+              @change="formItem.onChange($event, { formItem, formData: myFormData })">
               <el-option v-for="option in formItem.props.options" :key="option[formItem.props.key]"
                 :label="option[formItem.props.label]" :value="option[formItem.props.value]" />
             </el-select>
 
             <!-- 颜色 -->
             <el-color-picker v-else-if="formItem.type === 'color'" v-model="myFormData[formItem.key]"
-              :disabled="formItem.props.disabled" :style="formItem.props.style" @change="formItem.onChange" />
+              :disabled="formItem.props.disabled" :style="formItem.props.style"
+              @change="formItem.onChange($event, { formItem, formData: myFormData })" />
           </el-form-item>
         </template>
       </AnimateTransitionGroup>
