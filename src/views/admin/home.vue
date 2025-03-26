@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import FormEnhance from '@/components/FormEnhance/index.vue';
+
 
 onMounted(() => {
   console.log('home onMounted');
@@ -161,7 +163,7 @@ const operationConfig = [
 <template>
   <div>
     home
-    <FormPro :formData="formData" :formConfig="formConfig" :operationConfig="operationConfig"></FormPro>
+    <FormEnhance :formData="formData" :formConfig="formConfig" :operationConfig="operationConfig"></FormEnhance>
   </div>
 </template>
 

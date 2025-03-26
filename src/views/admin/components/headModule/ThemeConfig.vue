@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import localStorage from '@/utils/localStorage';
+import FormEnhance from '@/components/FormEnhance/index.vue';
 
 
 const drawer = ref(false);
 
-const formProRef = ref(null);
+const formEnhanceRef = ref(null);
 
 function open() {
   drawer.value = true;
@@ -30,7 +31,7 @@ const themeMap = {
 function confirm() {
   drawer.value = false;
 
-  const _formData = formProRef.value.getFormData();
+  const _formData = formEnhanceRef.value.getFormData();
 
   const theme = {};
 
@@ -121,7 +122,7 @@ const formConfig = [
       </template>
 
       <div>
-        <FormPro :formData="formData" :formConfig="formConfig" ref="formProRef"></FormPro>
+        <FormEnhance :formData="formData" :formConfig="formConfig" ref="formEnhanceRef"></FormEnhance>
       </div>
 
       <template #footer>
