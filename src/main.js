@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';  // 路由
 import 'animate.css';  // 引入animate动画样式
+import 'element-plus/dist/index.css';
 
 
 const app = createApp(App);
