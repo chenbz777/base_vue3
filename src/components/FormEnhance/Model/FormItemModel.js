@@ -124,7 +124,9 @@ class FormSwitch extends FormItemProps {
 
   getProps() {
     return {
-      disabled: false
+      disabled: false,
+      activeValue: true,
+      inactiveValue: false
     };
   }
 

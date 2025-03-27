@@ -341,7 +341,8 @@ defineExpose(defineExposeData);
 
             <!-- 开关 -->
             <el-switch v-else-if="formItem.type === 'switch'" v-model="myFormData[formItem.key]"
-              :disabled="formItem.props.disabled" :style="formItem.props.style"
+              :disabled="formItem.props.disabled" :active-value="formItem.props.activeValue"
+              :inactive-value="formItem.props.inactiveValue" :style="formItem.props.style"
               @change="formItem.onChange($event, { formItem, formData: myFormData })" />
 
             <!-- 时间 -->
