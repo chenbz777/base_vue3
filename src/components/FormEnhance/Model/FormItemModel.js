@@ -470,6 +470,7 @@ class FormItem {
       type: '',
       props: {},
       required: false,
+      groupTitle: '',
       showFn: (formData) => {
         return true;
       },

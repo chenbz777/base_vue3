@@ -50,7 +50,7 @@ const props = defineProps({
   labelWidth: {
     required: false,
     type: String,
-    default: '120px'
+    default: 'auto'
   }
 });
 
@@ -291,9 +291,14 @@ defineExpose(defineExposeData);
 <template>
   <div>
     <el-form :model="myFormData" ref="formRef" :rules="myRules" :label-width="labelWidth" :inline="inline"
-      @submit.prevent class="form-plus" :class="{ 'form-plus-inline': inline }" :label-position="labelPosition">
+      @submit.prevent class="form-enhance" :class="{ 'form-enhance-inline': inline }" :label-position="labelPosition">
       <AnimateTransitionGroup>
         <template v-for="formItem in myFormConfig" :key="formItem.key">
+
+          <div class="form-enhance__group-title" v-if="formItem.groupTitle">
+            {{ formItem.groupTitle }}
+          </div>
+
           <el-form-item :label="formItem.label" :prop="formItem.key" v-if="formItem.showFn(myFormData)">
             <template #label>
               {{ formItem.label }}
@@ -437,7 +442,7 @@ defineExpose(defineExposeData);
       </AnimateTransitionGroup>
 
       <el-form-item>
-        <div class="form-plus__operation" :style="{ textAlign: operationPosition }">
+        <div class="form-enhance__operation" :style="{ textAlign: operationPosition }">
           <template v-for="operation in operationList" :key="operation.text">
             <el-button :type="operation.type" @click="handleOperationClick(operation)">
               {{ operation.text }}
@@ -450,15 +455,15 @@ defineExpose(defineExposeData);
 </template>
 
 <style scoped>
-.form-plus__operation {
+.form-enhance__operation {
   flex: 1;
 }
 
-.form-plus-inline :deep(.el-input) {
+.form-enhance-inline :deep(.el-input) {
   --el-input-width: 220px;
 }
 
-.form-plus-inline :deep(.el-select) {
+.form-enhance-inline :deep(.el-select) {
   --el-select-width: 160px;
 }
 
@@ -478,5 +483,15 @@ defineExpose(defineExposeData);
 .form-item-read-only__content:empty::before {
   content: '---';
   color: #999;
+}
+
+.form-enhance__group-title {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #eff1f3;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  padding: 12px;
+  color: #606266;
 }
 </style>
