@@ -31,9 +31,12 @@ const formConfig = [
     label: '多行输入框',
     key: 'textarea',
     type: 'textarea',
-    required: false,
+    required: true,
     props: {
       textFormat: '邮箱'
+    },
+    showFn: (_formData) => {
+      return _formData.input === '1';
     }
   },
   {

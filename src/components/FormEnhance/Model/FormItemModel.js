@@ -1,5 +1,5 @@
 import TextFormat from '@/common/TextFormat';
-import date from '@/utils/date';
+
 
 class FormItemProps {
 
@@ -153,7 +153,7 @@ class FormTime extends FormItemProps {
   }
 
   getDefaultValue() {
-    return date.getTime();
+    return '';
   }
 }
 
@@ -198,7 +198,7 @@ class FormDate extends FormItemProps {
   }
 
   getDefaultValue() {
-    return date.getDate();
+    return '';
   }
 }
 
@@ -243,7 +243,7 @@ class FormDateTime extends FormItemProps {
   }
 
   getDefaultValue() {
-    return date.getDateTime();
+    return '';
   }
 }
 

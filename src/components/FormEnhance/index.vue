@@ -76,15 +76,15 @@ myFormConfig.value.forEach(item => {
 /**
  * 初始化表单校验规则
  */
-const rules = ref({});
+const myRules = ref({});
 
 myFormConfig.value.forEach(item => {
   if (item.required) {
-    rules.value[item.key] = item.props.getRules();
+    myRules.value[item.key] = item.props.getRules();
   }
 
   if (item.rules) {
-    rules.value[item.key] = item.rules;
+    myRules.value[item.key] = item.rules;
 
     item.required = true;
   }
@@ -264,9 +264,11 @@ function getFormData() {
 
 // 校验成功后执行回调
 function validateSuccess(callbackFn) {
-  formRef.value.validate((valid) => {
+  formRef.value.validate((valid, errorList) => {
     if (valid) {
       callbackFn(getFormData());
+    } else {
+      formRef.value.scrollToField(Object.keys(errorList)[0]);
     }
   });
 }
@@ -288,11 +290,11 @@ defineExpose(defineExposeData);
 
 <template>
   <div>
-    <el-form :model="myFormData" ref="formRef" :rules="rules" :label-width="labelWidth" :inline="inline" @submit.prevent
-      class="form-plus" :class="{ 'form-plus-inline': inline }" :label-position="labelPosition">
+    <el-form :model="myFormData" ref="formRef" :rules="myRules" :label-width="labelWidth" :inline="inline"
+      @submit.prevent class="form-plus" :class="{ 'form-plus-inline': inline }" :label-position="labelPosition">
       <AnimateTransitionGroup>
         <template v-for="formItem in myFormConfig" :key="formItem.key">
-          <el-form-item :label="formItem.label" :prop="formItem.key" v-show="formItem.showFn(myFormData)">
+          <el-form-item :label="formItem.label" :prop="formItem.key" v-if="formItem.showFn(myFormData)">
             <template #label>
               {{ formItem.label }}
             </template>
