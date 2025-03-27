@@ -494,4 +494,8 @@ defineExpose(defineExposeData);
   padding: 12px;
   color: #606266;
 }
+
+.form-enhance__group-title:first-child {
+  margin-top: 0;
+}
 </style>
