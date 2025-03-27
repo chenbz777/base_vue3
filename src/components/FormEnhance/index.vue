@@ -163,7 +163,7 @@ function unfastenObject(flatObj) {
       }
 
       if (!isLast) {
-        if (current[part] === undefined) {
+        if ((current[part] === undefined) || (current[part] === null)) {
           // 根据下一层级是否为数组索引，决定创建数组或对象
           current[part] = isNextPartArrayIndex ? [] : {};
         }
