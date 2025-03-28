@@ -35,13 +35,13 @@ const props = defineProps({
 
 <style scoped>
 :deep(.el-sub-menu__title) {
-  border-radius: var(--br-s);
+  border-radius: var(--br-2);
   height: 46px !important;
 }
 
 :deep(.el-sub-menu__title:hover) {
-  background-color: var(--theme-active);
-  color: var(--theme-active-contrast);
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 
 .el-sub-menu .el-menu-item {
@@ -50,18 +50,18 @@ const props = defineProps({
 
 .el-menu-item {
   margin: 3px 0;
-  border-radius: var(--br-s);
+  border-radius: var(--br-2);
   height: 46px !important;
 }
 
 .el-menu-item:hover {
-  background-color: var(--theme-active);
-  color: var(--theme-active-contrast);
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 
 .el-menu-item.is-active,
 .el-menu-item:hover {
-  background-color: var(--theme-active);
-  color: var(--theme-active-contrast);
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 </style>

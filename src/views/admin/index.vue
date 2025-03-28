@@ -44,18 +44,18 @@ const { adminKeepAliveList, formatComponentInstance } = useRouterPlus();
 <style scoped>
 .admin {
   display: flex;
-  background-color: var(--theme-page-bg);
-  color: var(--theme-primary-text);
+  background-color: var(--bg-base-color);
+  color: var(--text-base-color);
 }
 
 .admin__aside {
   position: relative;
   height: 100vh;
-  padding: 10px 6px;
+  padding: var(--p-1);
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: var(--theme-page-secondary-bg);
-  border-right: 1px solid var(--theme-base-border);
+  background-color: var(--bg-secondary-color);
+  border-right: 1px solid var(--border-base-color);
 }
 
 .admin__main {
@@ -64,20 +64,21 @@ const { adminKeepAliveList, formatComponentInstance } = useRouterPlus();
 }
 
 .admin__main__head {
-  background-color: var(--theme-page-bg);
+  background-color: var(--bg-base-color);
 }
 
 .admin__main__content {
-  padding: 10px;
+  padding: var(--p-2);
   height: calc(100vh - 60px - 42px);
   overflow: auto;
-  background-color: var(--theme-page-secondary-bg);
+  background-color: var(--bg-secondary-color);
 }
 
 .admin__main__content__body {
-  padding: 20px;
-  background-color: var(--theme-page-bg);
-  border-radius: var(--br-s);
+  min-height: 100%;
+  padding: var(--p-3);
+  background-color: var(--bg-base-color);
+  border-radius: var(--br-2);
   box-shadow: 0px 1px 2px 0px rgba(19, 51, 107, 0.10),
     0px 0px 1px 0px rgba(19, 51, 107, 0.15);
 }

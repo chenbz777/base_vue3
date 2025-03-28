@@ -25,6 +25,6 @@ const { isOpen, menuList } = useMenu();
 }
 
 .el-menu-vertical:not(.el-menu--collapse) {
-  width: 240px;
+  width: 220px;
 }
 </style>

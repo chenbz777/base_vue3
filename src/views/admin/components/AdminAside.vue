@@ -25,10 +25,10 @@ const { showTitle, title } = useMenu();
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 10px;
+  padding: 0 var(--p-2);
   height: 60px;
-  font-size: 22px;
+  font-size: var(--fs-4);
   font-weight: 500;
-  color: var(--theme-active);
+  color: var(--primary-color);
 }
 </style>

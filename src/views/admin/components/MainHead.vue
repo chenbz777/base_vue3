@@ -1,18 +1,14 @@
 <script setup>
-import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import utils from '@/utils';
 import useRouterPlus from '@/hooks/useRouterPlus';
-import ThemeConfig from './headModule/ThemeConfig.vue';
 import useMenu from '@/hooks/useMenu';
 import useUserInfo from '@/hooks/useUserInfo';
-import { ArrowDownBold, Brush, Expand, Fold, FullScreen } from '@element-plus/icons-vue';
+import { ArrowDownBold, Expand, Fold, FullScreen } from '@element-plus/icons-vue';
 
 
 const router = useRouter();
 const route = useRoute();
-
-const themeConfigRef = ref(null);
 
 const { getRoutesData } = useRouterPlus();
 
@@ -61,10 +57,6 @@ const toggleFullScreen = () => {
 
     <div class="main__head__right">
 
-      <el-icon class="main__head__right__icon" @click="themeConfigRef.open()">
-        <Brush />
-      </el-icon>
-
       <el-icon @click="toggleFullScreen()" class="main__head__right__icon">
         <FullScreen />
       </el-icon>
@@ -82,8 +74,6 @@ const toggleFullScreen = () => {
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-
-      <ThemeConfig ref="themeConfigRef" />
     </div>
   </div>
 </template>

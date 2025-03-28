@@ -109,7 +109,7 @@ const login = () => {
   letter-spacing: 3px;
   text-align: center;
   margin-bottom: 60px;
-  color: var(--theme-active);
+  color: var(--primary-color);
   font-weight: bold;
 }
 
@@ -118,7 +118,7 @@ const login = () => {
   width: 100%;
   letter-spacing: 10px;
   font-size: 18px;
-  background-color: var(--theme-active);
+  background-color: var(--primary-color);
 }
 
 .login--forgot-password {

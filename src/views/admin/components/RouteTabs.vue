@@ -123,8 +123,8 @@ const closeOtherTabs = () => {
 
 <style scoped>
 .route-tabs {
-  border-top: 1px solid var(--theme-base-border);
-  border-bottom: 1px solid var(--theme-base-border);
+  border-top: 1px solid var(--border-base-color);
+  border-bottom: 1px solid var(--border-base-color);
   padding-bottom: 0;
   display: flex;
   align-items: center;
@@ -136,29 +136,30 @@ const closeOtherTabs = () => {
 }
 
 .route-tabs__right {
-  padding: 0 10px;
+  padding: 0 var(--p-2);
 }
 
 :deep(.el-tabs--card>.el-tabs__header) {
   border: 0;
   margin: 0;
+  height: auto;
 }
 
 :deep(.el-tabs--card>.el-tabs__header .el-tabs__nav) {
   border-top: 0;
-  border-bottom: 0;
-  border-left: 1px solid #ebeef5;
-  border-right: 1px solid #ebeef5;
+  border-left: 0;
+  border-right: 1px solid var(--border-base-color);
+  border-bottom: 1px solid var(--border-base-color);
   border-radius: 0;
 }
 
 :deep(.el-tabs__item:hover) {
-  color: var(--theme-active);
+  color: var(--primary-color);
 }
 
 :deep(.el-tabs__item.is-active) {
-  color: var(--theme-active);
-  background-color: #f4f8fe;
+  background-color: var(--primary-color-1);
+  color: var(--primary-text-color-1);
 }
 
 :deep(.el-tabs__new-tab) {
@@ -176,12 +177,12 @@ const closeOtherTabs = () => {
   width: 10px;
   height: 10px;
   border-radius: 100%;
-  background-color: #d8d8d8;
-  margin-right: 7px;
+  background-color: var(--border-base-color);
+  margin-right: var(--m-1);
 }
 
 :deep(.el-tabs__item.is-active .rt-el-tabs__item--tips) {
-  background-color: var(--theme-active);
+  background-color: var(--primary-color);
 }
 
 :deep(.el-tabs--card>.el-tabs__header .el-tabs__item) {

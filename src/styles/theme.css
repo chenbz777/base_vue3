@@ -1,16 +1,4 @@
 :root {
-  --theme-page-bg: #ffffff;
-  --theme-page-secondary-bg: #f1f2f3;
-
-  --theme-active: #007aff;
-  --theme-active-contrast: #ffffff;
-
-  --theme-primary-text: #303133;
-  --theme-regular-text: #606266;
-  --theme-secondary-text: #909399;
-
-  --theme-base-border: #dcdfe6;
-
   --m-1: 8px;
   --m-2: 12px;
   --m-3: 20px;
@@ -52,4 +40,13 @@
 
   --text-base-color: #000000;
   --text-secondary-color: #606266;
+  --text-tertiary-color: #8c8c8c;
+
+  --primary-color: #1677ff;
+  --primary-color-1: #e2f2fe;
+
+  --primary-text-color: #ffffff;
+  --primary-text-color-1: #1677ff;
+
+  --border-base-color: #dcdfe6;
 }
