@@ -1,17 +1,43 @@
 :root {
-  --m-s: 6px;
-  --m-m: 12px;
-  --m-l: 24px;
+  --m-1: 8px;
+  --m-2: 12px;
+  --m-3: 20px;
+  --m-4: 32px;
+  --m-5: 48px;
 
-  --p-s: 6px;
-  --p-m: 12px;
-  --p-l: 24px;
+  --p-1: 8px;
+  --p-2: 12px;
+  --p-3: 20px;
+  --p-4: 32px;
+  --p-5: 48px;
 
-  --br-s: 6px;
-  --br-m: 12px;
-  --br-l: 24px;
+  --fs-1: 12px;
+  --fs-2: 14px;
+  --fs-3: 16px;
+  --fs-4: 20px;
+  --fs-5: 24px;
 
-  --fs-s: 12px;
-  --fs-m: 16px;
-  --fs-l: 24px;
+  --lh-1: 20px;
+  --lh-2: 22px;
+  --lh-3: 24px;
+  --lh-4: 28px;
+  --lh-5: 32px;
+
+  --fw-1: 400;
+  --fw-2: 500;
+  --fw-3: 600;
+  --fw-4: 700;
+  --fw-5: 800;
+
+  --br-1: 6px;
+  --br-2: 8px;
+  --br-3: 12px;
+  --br-4: 16px;
+  --br-5: 24px;
+
+  --bg-base-color: #ffffff;
+  --bg-secondary-color: #f8f9fa;
+
+  --text-base-color: #000000;
+  --text-secondary-color: #606266;
 }
