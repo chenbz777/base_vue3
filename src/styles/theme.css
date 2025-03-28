@@ -40,4 +40,13 @@
 
   --text-base-color: #000000;
   --text-secondary-color: #606266;
+  --text-tertiary-color: #8c8c8c;
+
+  --primary-color: #1677ff;
+  --primary-color-1: #e2f2fe;
+
+  --primary-text-color: #ffffff;
+  --primary-text-color-1: #1677ff;
+
+  --border-base-color: #dcdfe6;
 }
