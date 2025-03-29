@@ -75,9 +75,9 @@ const login = () => {
           </el-form-item>
         </el-form>
 
-        <el-button type="primary" size="large" class="login__btn" id="loginBtn" @click="validateForm()">
+        <div class="login__btn" id="loginBtn" @click="validateForm()">
           登录
-        </el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -110,12 +110,16 @@ const login = () => {
 }
 
 .login__btn {
-  margin-top: var(--m-3);
+  margin-top: var(--m-4);
   width: 100%;
   letter-spacing: 10px;
   font-size: var(--fs-4);
-  background-color: var(--primary-color);
   border-radius: var(--br-2);
+  padding: var(--p-2) var(--p-2);
+  text-align: center;
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  cursor: pointer;
 }
 
 :deep(.el-input__wrapper) {
