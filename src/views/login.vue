@@ -75,11 +75,7 @@ const login = () => {
           </el-form-item>
         </el-form>
 
-        <div class="login--forgot-password">
-          <el-button text>忘记密码?</el-button>
-        </div>
-
-        <el-button type="primary" size="large" round class="login__btn" id="loginBtn" @click="validateForm()">
+        <el-button type="primary" size="large" class="login__btn" id="loginBtn" @click="validateForm()">
           登录
         </el-button>
       </div>
@@ -94,38 +90,36 @@ const login = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8f8f8;
+  background-color: var(--bg-tertiary-color);
 }
 
 .login__content {
-  padding: 30px 20px;
-  border-radius: 8px;
+  padding: var(--p-4);
+  border-radius: var(--br-2);
   width: 500px;
-  background-color: white;
+  background-color: var(--bg-base-color);
 }
 
 .login__content__title {
-  font-size: 30px;
+  font-size: var(--fs-5);
   letter-spacing: 3px;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: var(--m-5);
   color: var(--primary-color);
   font-weight: bold;
 }
 
 .login__btn {
-  margin-top: 30px;
+  margin-top: var(--m-3);
   width: 100%;
   letter-spacing: 10px;
-  font-size: 18px;
+  font-size: var(--fs-4);
   background-color: var(--primary-color);
-}
-
-.login--forgot-password {
-  text-align: right;
+  border-radius: var(--br-2);
 }
 
 :deep(.el-input__wrapper) {
-  padding: 5px 20px;
+  padding: var(--p-1) var(--p-2);
+  border-radius: var(--br-2);
 }
 </style>

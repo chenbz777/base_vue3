@@ -21,7 +21,7 @@ const { routesMap } = getRoutesData();
 const logout = () => {
   utils.localStorage.delAll();
 
-  router.push('/admin/login');
+  router.push('/login');
 };
 
 // 切换全屏
