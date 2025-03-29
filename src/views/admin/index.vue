@@ -75,7 +75,8 @@ const { adminKeepAliveList, formatComponentInstance } = useRouterPlus();
 }
 
 .admin__main__content__body {
-  min-height: 100%;
+  height: 100%;
+  overflow-y: auto;
   padding: var(--p-3);
   background-color: var(--bg-base-color);
   border-radius: var(--br-2);
