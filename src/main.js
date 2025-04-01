@@ -7,7 +7,7 @@ import 'vant/lib/index.css';
 import BaseContainer from '@/components/BaseContainer.vue';  // 引入BaseContainer组件
 import AnimateTransition from '@/components/AnimateTransition.vue';  // 引入AnimateTransition组件
 import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';  // 引入AnimateTransitionGroup组件
-import ImageEnhance from '@/components/ImageEnhance';  // 引入图片增强库
+import ImageEnhance from '@/components/ImageEnhance.vue';  // 引入图片增强库
 
 // 创建应用实例
 const app = createApp(App);
