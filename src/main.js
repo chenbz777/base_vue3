@@ -7,7 +7,7 @@ import AnimateTransition from '@/components/AnimateTransition.vue';  // 引入An
 import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';  // 引入AnimateTransitionGroup组件
 import 'element-plus/dist/index.css';
 import 'vant/lib/index.css';
-
+import ImageEnhance from '@/components/ImageEnhance';  // 引入图片增强库
 
 // 创建应用实例
 const app = createApp(App);
@@ -19,5 +19,6 @@ app.component('BaseContainer', BaseContainer);
 app.component('AnimateTransition', AnimateTransition);
 app.component('AnimateTransitionGroup', AnimateTransitionGroup);
 
+app.component('ImageEnhance', ImageEnhance);
 
 app.mount('#app');
