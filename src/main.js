@@ -6,7 +6,7 @@ import 'element-plus/dist/index.css';
 import 'vant/lib/index.css';
 import AnimateTransition from '@/components/AnimateTransition.vue';  // 引入AnimateTransition组件
 import AnimateTransitionGroup from '@/components/AnimateTransitionGroup.vue';  // 引入AnimateTransitionGroup组件
-import ImageEnhance from '@/components/ImageEnhance';  // 引入图片增强库
+import ImageEnhance from '@/components/ImageEnhance.vue';  // 引入图片增强库
 
 const app = createApp(App);
 
