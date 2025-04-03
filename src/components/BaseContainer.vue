@@ -1,9 +1,5 @@
 <script setup>
 defineProps({
-  isPage: {
-    type: Boolean,
-    default: false
-  },
   height: {
     type: String,
     default: 'auto'
@@ -12,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="bc" :class="{ 'bc--page': isPage }" :style="{ height }">
+  <div class="bc" :class="{ 'bc--page': height === '100vh' }" :style="{ height }">
     <div class="bc__head">
       <slot name="head" />
     </div>
