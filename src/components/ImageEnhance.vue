@@ -32,46 +32,7 @@ const imageRef = ref(null);
 
 const currentSrc = ref('/loading.gif');
 
-function lazyImage(elm) {
-  // [阮一峰 IntersectionObserver API 使用教程](https://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
-  const io = new IntersectionObserver((entires) => {
-    entires.forEach(item => {
-      if (item.isIntersecting) {
-        // 该元素进入视口，开始加载图片
-        const target = item.target;
-
-        // 获取真实的图片缩略图地址
-        const thumbnailSrc = target.getAttribute('data-thumbnail');
-
-        // 将图片地址赋值给src属性。
-        target.setAttribute('src', thumbnailSrc);
-
-        // 将该元素停止监听
-        io.unobserve(target);
-
-        // 开始加载原图
-        const image = new Image();
-
-        image.src = target.getAttribute('data-src');
-
-        image.onload = () => {
-          // 图片加载完成后，设置src属性
-          target.setAttribute('src', image.src);
-        };
-
-        image.onerror = () => {
-          // 图片加载失败后，设置src属性
-          target.setAttribute('src', '/imageError.png');
-        };
-      }
-    });
-  });
-
-  io.observe(elm);
-}
-
-
-function getFullUrl() {
+function getOriginalUrl() {
   if (!props.src) {
     return '';
   }
@@ -86,6 +47,7 @@ function getFullUrl() {
 
   return `${config.request.baseURL}${props.src}`;
 }
+
 
 function getThumbnailUrl() {
   if (!props.src) {
@@ -103,8 +65,68 @@ function getThumbnailUrl() {
   return `${config.request.baseURL}${props.src}`;
 }
 
+function loadOriginal() {
+  const url = getOriginalUrl();
+
+  const image = new Image();
+
+  image.src = url;
+
+  image.onload = () => {
+    currentSrc.value = url;
+  };
+
+  image.onerror = () => {
+    currentSrc.value = '/imageError.png';
+  };
+}
+
+
+function loadThumbnail() {
+  const url = getThumbnailUrl();
+
+  const image = new Image();
+
+  image.src = url;
+
+  image.onload = () => {
+    currentSrc.value = url;
+
+    // 预加载原图
+    loadOriginal();
+  };
+
+  image.onerror = () => {
+    currentSrc.value = '/imageError.png';
+  };
+}
+
+function lazyImage(elm) {
+  // [阮一峰 IntersectionObserver API 使用教程](https://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
+  const io = new IntersectionObserver((entires) => {
+    entires.forEach(item => {
+      // 该元素进入视口
+      if (item.isIntersecting) {
+        const target = item.target;
+
+        // 加载缩略图
+        loadThumbnail();
+
+        // 将该元素停止监听
+        io.unobserve(target);
+      }
+    });
+  });
+
+  io.observe(elm);
+}
+
 nextTick(() => {
   const target = imageRef.value;
+
+  if (!target) {
+    return;
+  }
 
   /**
    * 设置图片的属性
@@ -114,22 +136,14 @@ nextTick(() => {
   target.setAttribute('data-thumbnail', getThumbnailUrl());
 
   // 设置图片原图
-  target.setAttribute('data-src', getFullUrl());
+  target.setAttribute('data-original', getOriginalUrl());
 
   lazyImage(target);
 });
-
-function handleImageError(event) {
-  const { target } = event;
-
-  // 更换图片地址为: 图片加载失败占位图
-  target.src = '/imageError.png';
-}
 </script>
 
 <template>
-  <img :src="currentSrc" class="image-enhance" :style="{ aspectRatio, objectFit: mode }" ref="imageRef"
-    @error="handleImageError" />
+  <img :src="currentSrc" class="image-enhance" :style="{ aspectRatio, objectFit: mode }" ref="imageRef" />
 </template>
 
 <style scoped>
