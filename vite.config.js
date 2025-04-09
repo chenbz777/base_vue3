@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
     ],
     server: { // 开发服务器配置
     },
-    base: '/',
+    base: './',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src')
