@@ -190,7 +190,13 @@ function initFormData() {
 
   // 兜底默认值
   myFormConfig.value.forEach(formItem => {
+    // 如果表单数据中没有该字段，则使用默认值
     if (!myFormDataKeys.includes(formItem.key)) {
+      myFormData.value[formItem.key] = formItem.props.getDefaultValue();
+    }
+
+    // 如果表单数据为null，则使用默认值
+    if (myFormData.value[formItem.key] === null) {
       myFormData.value[formItem.key] = formItem.props.getDefaultValue();
     }
 
