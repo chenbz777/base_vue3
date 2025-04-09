@@ -47,8 +47,8 @@ class FormInput extends FormItemProps {
       disabled: false,
       prefix: '',
       suffix: '',
-      maxLength: 600,
-      showLimit: true,
+      maxLength: 999999,
+      showLimit: false,
       clearable: true,
       textFormat: '不限制'
     };
@@ -84,10 +84,10 @@ class FormTextarea extends FormInput {
     return {
       placeholder: '请输入',
       disabled: false,
-      maxLength: 600,
+      maxLength: 999999,
       minRows: 4,
       maxRows: 6,
-      showLimit: true,
+      showLimit: false,
       clearable: true,
       textFormat: '不限制'
     };
