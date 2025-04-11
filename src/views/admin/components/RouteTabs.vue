@@ -1,7 +1,7 @@
 <script setup>
 import { watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import useRouterPlus from '@/hooks/useRouterPlus';
+import useRouterEnhance from '@/hooks/useRouterEnhance';
 import { ElNotification } from 'element-plus';
 import { ArrowDownBold } from '@element-plus/icons-vue';
 
@@ -9,7 +9,7 @@ import { ArrowDownBold } from '@element-plus/icons-vue';
 const route = useRoute();
 const router = useRouter();
 
-const { adminKeepAliveList, componentMap } = useRouterPlus();
+const { adminKeepAliveList, componentMap } = useRouterEnhance();
 
 watch(() => route.fullPath, () => {
   const routeData = {};

@@ -2,13 +2,13 @@
 import AdminAside from './components/AdminAside.vue';
 import MainHead from './components/MainHead.vue';
 import { useRoute } from 'vue-router';
-import useRouterPlus from '@/hooks/useRouterPlus';
+import useRouterEnhance from '@/hooks/useRouterEnhance';
 import RouteTabs from './components/RouteTabs.vue';
 
 
 const route = useRoute();
 
-const { adminKeepAliveList, formatComponentInstance } = useRouterPlus();
+const { adminKeepAliveList, formatComponentInstance } = useRouterEnhance();
 </script>
 
 <template>

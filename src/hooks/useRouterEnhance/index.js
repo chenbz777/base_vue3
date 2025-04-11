@@ -79,7 +79,7 @@ const formatComponentInstance = (component, route) => {
   }
 };
 
-export default function useRouterPlus() {
+export default function useRouterEnhance() {
   return {
     getRoutesData,
     adminKeepAliveList,

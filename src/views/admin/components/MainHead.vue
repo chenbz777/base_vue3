@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter, useRoute } from 'vue-router';
 import utils from '@/utils';
-import useRouterPlus from '@/hooks/useRouterPlus';
+import useRouterEnhance from '@/hooks/useRouterEnhance';
 import useMenu from '@/hooks/useMenu';
 import useUserInfo from '@/hooks/useUserInfo';
 import { ArrowDownBold, Expand, Fold, FullScreen } from '@element-plus/icons-vue';
@@ -10,7 +10,7 @@ import { ArrowDownBold, Expand, Fold, FullScreen } from '@element-plus/icons-vue
 const router = useRouter();
 const route = useRoute();
 
-const { getRoutesData } = useRouterPlus();
+const { getRoutesData } = useRouterEnhance();
 
 const { toggleCollapse, isOpen } = useMenu();
 

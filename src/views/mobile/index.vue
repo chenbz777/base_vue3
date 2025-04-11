@@ -1,13 +1,13 @@
 <script setup>
 import { useRoute } from 'vue-router';
-import useRouterPlus from '@/hooks/useRouterPlus';
+import useRouterEnhance from '@/hooks/useRouterEnhance';
 import MobileEasyHead from './components/MobileEasyHead.vue';
 import useRouteData from '@/hooks/useRouteData';
 
 
 const route = useRoute();
 
-const { mobileKeepAliveList, formatComponentInstance } = useRouterPlus();
+const { mobileKeepAliveList, formatComponentInstance } = useRouterEnhance();
 
 const { navigationType } = useRouteData();
 </script>
