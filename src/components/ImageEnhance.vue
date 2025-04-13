@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onBeforeUnmount } from 'vue';
 import config from '@/config';
 
 
@@ -31,6 +31,8 @@ const props = defineProps({
 const imageRef = ref(null);
 
 const currentSrc = ref('/loading.gif');
+
+let io = null;
 
 function getOriginalUrl() {
   if (!props.src) {
@@ -103,7 +105,7 @@ function loadThumbnail() {
 
 function lazyImage(elm) {
   // [阮一峰 IntersectionObserver API 使用教程](https://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
-  const io = new IntersectionObserver((entires) => {
+  io = new IntersectionObserver((entires) => {
     entires.forEach(item => {
       // 该元素进入视口
       if (item.isIntersecting) {
@@ -139,6 +141,14 @@ nextTick(() => {
   target.setAttribute('data-original', getOriginalUrl());
 
   lazyImage(target);
+});
+
+
+onBeforeUnmount(() => {
+  if (io) {
+    io.disconnect();
+    io = null;
+  }
 });
 </script>
 
