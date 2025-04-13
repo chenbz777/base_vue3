@@ -104,20 +104,13 @@ function loadThumbnail() {
 }
 
 function lazyImage(elm) {
-  // [阮一峰 IntersectionObserver API 使用教程](https://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
-  io = new IntersectionObserver((entires) => {
-    entires.forEach(item => {
-      // 该元素进入视口
-      if (item.isIntersecting) {
-        const target = item.target;
+  io = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      // 加载缩略图
+      loadThumbnail();
 
-        // 加载缩略图
-        loadThumbnail();
-
-        // 将该元素停止监听
-        io.unobserve(target);
-      }
-    });
+      io.disconnect();
+    }
   });
 
   io.observe(elm);
@@ -143,11 +136,9 @@ nextTick(() => {
   lazyImage(target);
 });
 
-
 onBeforeUnmount(() => {
-  if (io && imageRef.value) {
-    // 取消监听
-    io.disconnect(imageRef.value);
+  if (io) {
+    io.disconnect();
     io = null;
   }
 });
