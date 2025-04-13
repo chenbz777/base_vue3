@@ -16,6 +16,9 @@
     <van-button type="default">默认按钮</van-button>
     <van-button type="danger">危险按钮</van-button>
     <van-button type="warning">警告按钮</van-button>
+
+    <ImageEnhance :src="`https://img.chenbz.com/a_test/zwt1x1.png?index=${index}`" v-for="index in 10" :key="index">
+    </ImageEnhance>
   </div>
 </template>
 

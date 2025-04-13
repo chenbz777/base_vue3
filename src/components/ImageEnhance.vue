@@ -30,7 +30,7 @@ const props = defineProps({
 
 const imageRef = ref(null);
 
-const currentSrc = ref('/loading.gif');
+const currentSrc = ref('');
 
 let io = null;
 
@@ -116,7 +116,7 @@ function lazyImage(elm) {
   io.observe(elm);
 }
 
-nextTick(() => {
+function loadLoading() {
   const target = imageRef.value;
 
   if (!target) {
@@ -133,7 +133,23 @@ nextTick(() => {
   // 设置图片原图
   target.setAttribute('data-original', getOriginalUrl());
 
-  lazyImage(target);
+  const image = new Image();
+
+  image.src = '/loading.gif';
+
+  image.onload = () => {
+    currentSrc.value = '/loading.gif';
+
+    lazyImage(target);
+  };
+
+  image.onerror = () => {
+    currentSrc.value = '/imageError.png';
+  };
+}
+
+nextTick(() => {
+  loadLoading();
 });
 
 onBeforeUnmount(() => {
