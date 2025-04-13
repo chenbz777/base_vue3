@@ -145,8 +145,9 @@ nextTick(() => {
 
 
 onBeforeUnmount(() => {
-  if (io) {
-    io.disconnect();
+  if (io && imageRef.value) {
+    // 取消监听
+    io.disconnect(imageRef.value);
     io = null;
   }
 });
