@@ -7,14 +7,6 @@ const props = defineProps({
   src: {
     type: String,
     default: ''
-  },
-  aspectRatio: {
-    type: String,
-    default: ''
-  },
-  mode: {
-    type: String,
-    default: 'contain'
   }
 });
 
@@ -161,7 +153,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <img :src="currentSrc" class="image-enhance" :style="{ aspectRatio, objectFit: mode }" ref="imageRef" />
+  <img :src="currentSrc" class="image-enhance" ref="imageRef" />
 </template>
 
 <style scoped>
@@ -169,5 +161,6 @@ onBeforeUnmount(() => {
   display: block;
   width: 100%;
   height: auto;
+  object-fit: contain;
 }
 </style>
