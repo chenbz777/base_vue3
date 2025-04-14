@@ -45,10 +45,12 @@ watch(() => route.fullPath, () => {
 <template>
   <MobileBaseHead class="mobile-easy-head" v-if="showMobileHead">
     <template #left v-if="showBackButton">
-      <el-icon class="mobile__head__icon" @click="clickBackFn ? clickBackFn() : defaultClickBack()">
-        <ArrowLeftBold />
-      </el-icon>
-      返回
+      <div class="mobile-easy-head__left" @click="clickBackFn ? clickBackFn() : defaultClickBack()">
+        <el-icon class="mobile__head__icon">
+          <ArrowLeftBold />
+        </el-icon>
+        返回
+      </div>
     </template>
 
     <div class="mobile-easy-head__title">{{ route.meta?.title }}</div>
@@ -63,6 +65,11 @@ watch(() => route.fullPath, () => {
 .mobile-easy-head {
   background-color: white;
   color: black;
+}
+
+.mobile-easy-head__left {
+  display: flex;
+  align-items: center;
 }
 
 .mobile-easy-head__title {
