@@ -14,7 +14,7 @@ const props = defineProps({
   },
   mode: {
     type: String,
-    default: 'cover'
+    default: 'contain'
   }
 });
 
