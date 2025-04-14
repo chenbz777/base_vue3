@@ -23,7 +23,8 @@
   padding: var(--p-1) var(--p-2);
   text-align: center;
   font-size: 18px;
-  background-color: #ededed;
+  background-color: #ffffff;
+  color: #000000;
   display: flex;
   align-items: center;
 }

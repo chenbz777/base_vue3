@@ -29,21 +29,44 @@ const showMobileHead = ref(true);
 
 const showBackButton = ref(false);
 
+const backgroundColor = ref('');
+
+const textColor = ref('');
+
+const titleText = ref('');
+
 watch(() => route.fullPath, () => {
+  // 如果不是第一个路由，显示【返回】按钮
+  showBackButton.value = route.name !== mobileRouteListFirst.name;
+
   if (!route.meta) {
     return;
   }
 
-  // 如果路由的 meta 中没有 navigationStyle，或者 navigationStyle 不是 'custom'，则显示头部
-  showMobileHead.value = route.meta.navigationStyle !== 'custom';
+  const {
+    navigationStyle = '',
+    navigationBarBackgroundColor = '#ffffff',
+    navigationBarTextColor = '#000000',
+    title = ''
+  } = route.meta;
 
-  // 如果不是第一个路由，显示【返回】按钮
-  showBackButton.value = route.name !== mobileRouteListFirst.name;
+  // 如果路由的 meta 中没有 navigationStyle，或者 navigationStyle 不是 'custom'，则显示头部
+  showMobileHead.value = navigationStyle !== 'custom';
+
+  backgroundColor.value = navigationBarBackgroundColor;
+
+  textColor.value = navigationBarTextColor;
+
+  titleText.value = title;
+
 }, { immediate: true });
 </script>
 
 <template>
-  <MobileBaseHead class="mobile-easy-head" v-if="showMobileHead">
+  <MobileBaseHead class="mobile-easy-head" :style="{
+    backgroundColor: backgroundColor,
+    color: textColor
+  }" v-if="showMobileHead">
     <template #left v-if="showBackButton">
       <div class="mobile-easy-head__left" @click="clickBackFn ? clickBackFn() : defaultClickBack()">
         <el-icon class="mobile__head__icon">
@@ -53,7 +76,7 @@ watch(() => route.fullPath, () => {
       </div>
     </template>
 
-    <div class="mobile-easy-head__title">{{ route.meta?.title }}</div>
+    <div class="mobile-easy-head__title">{{ titleText }}</div>
 
     <template #right>
       <slot name="right"></slot>
@@ -62,11 +85,6 @@ watch(() => route.fullPath, () => {
 </template>
 
 <style scoped>
-.mobile-easy-head {
-  background-color: white;
-  color: black;
-}
-
 .mobile-easy-head__left {
   display: flex;
   align-items: center;
