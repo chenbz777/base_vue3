@@ -291,6 +291,10 @@ class FormUploadFile extends FormItemProps {
   }
 
   getDefaultValue() {
+    if (this.uploadLimit === 1) {
+      return '';
+    }
+
     return [];
   }
 
