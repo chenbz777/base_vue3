@@ -19,11 +19,11 @@
 
 <style scoped>
 .mobile-base-head {
-  height: 44px;
+  height: 48px;
   padding: var(--p-1) var(--p-2);
   text-align: center;
-  font-size: var(--fs-3);
-  background-color: #eaeaea;
+  font-size: 18px;
+  background-color: #ededed;
   display: flex;
   align-items: center;
 }
