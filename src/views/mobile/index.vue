@@ -13,9 +13,9 @@ const { navigationType } = useRouteData();
 </script>
 
 <template>
-  <BaseContainer class="mobile">
+  <BaseContainer height="100vh">
     <template #head>
-      <MobileEasyHead id="mobileHead" />
+      <MobileEasyHead />
     </template>
 
     <router-view v-slot="{ Component }">
@@ -28,8 +28,4 @@ const { navigationType } = useRouteData();
   </BaseContainer>
 </template>
 
-<style scoped>
-.mobile {
-  height: 100vh;
-}
-</style>
+<style scoped></style>

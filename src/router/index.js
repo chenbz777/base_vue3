@@ -20,7 +20,8 @@ const routes = [
         component: () => import('@/views/mobile/home.vue'),
         meta: {
           title: '首页',
-          keepAlive: true
+          keepAlive: true,
+          navigationStyle: 'custom'
         }
       },
       {

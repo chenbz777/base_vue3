@@ -20,10 +20,9 @@
 <style scoped>
 .mobile-base-head {
   height: 44px;
-  padding: 6px 20px;
+  padding: var(--p-1) var(--p-2);
   text-align: center;
-  font-weight: 600;
-  font-size: 18px;
+  font-size: var(--fs-3);
   background-color: #eaeaea;
   display: flex;
   align-items: center;
