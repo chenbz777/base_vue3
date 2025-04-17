@@ -3,6 +3,7 @@ import { ref, reactive, watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import localStorage from '@/utils/localStorage';
 import axios from 'axios';
+import { useFormItem } from 'element-plus';
 
 
 const props = defineProps({
@@ -57,11 +58,19 @@ watch(() => props.modelValue, (value) => {
   immediate: true
 });
 
+const { formItem } = useFormItem();
+
 watch(() => fileList.value, (files) => {
   if (isArray) {
     emit('update:modelValue', files);
+    formItem?.validate('change').catch((err) => {
+      console.log('验证失败: ', err);
+    });
   } else {
     emit('update:modelValue', files[0]?.url || '');
+    formItem?.validate('change').catch((err) => {
+      console.log('验证失败: ', err);
+    });
   }
 }, {
   deep: true

@@ -114,7 +114,10 @@ function flattenObject(obj, prefix = '') {
       const value = obj[key];
 
       /* 值处理逻辑 */
-      if (typeof value === 'object' && value !== null) {
+      // 如果是数组，则保留原结构
+      if (Array.isArray(value)) {
+        result[newKey] = value;
+      } else if (typeof value === 'object' && value !== null) {
         // 递归情况：值为对象/数组时继续深层扁平化
         // 使用 Object.assign 合并深层扁平化结果到当前结果集
         Object.assign(
