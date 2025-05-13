@@ -37,27 +37,56 @@ const set = (key, value, expirationTime) => {
 
 };
 
-const get = (key) => {
-
+const getValueByKey = (key) => {
   if (!key) {
     return null;
   }
 
-  const data = JSON.parse(localStorage.getItem(key));
+  const value = localStorage.getItem(key);
 
-  if (data === null) {
+  if (!value) {
     return null;
   }
 
-  // 判断是否存在过期时间
-  if ((data.expirationTime !== -1) && (Date.now() > data.expirationTime)) {
+  try {
+    const data = JSON.parse(value);
 
-    del(key);
+    // 判断是否存在过期时间
+    if ((data.expirationTime !== -1) && (Date.now() > data.expirationTime)) {
 
-    return null;
+      del(key);
+
+      return null;
+    }
+
+    return data.value;
+  } catch (e) {
+    // 解析失败 => 说明是原生数据
+    return value;
+  }
+};
+
+const getAll = () => {
+  const allLocalStorage = {};
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+
+    const value = getValueByKey(key);
+
+    if (value !== null) {
+      allLocalStorage[key] = value;
+    }
   }
 
-  return data.value;
+  return allLocalStorage;
+};
+
+const get = (key) => {
+  // 获取所有数据, 目的是为了清空过期数据
+  getAll();
+
+  return getValueByKey(key);
 };
 
 const del = (key) => {
@@ -83,5 +112,6 @@ export default {
   set,
   get,
   del,
-  delAll
+  delAll,
+  getAll
 };
