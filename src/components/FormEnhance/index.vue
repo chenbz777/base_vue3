@@ -187,7 +187,7 @@ function unfastenObject(flatObj) {
 const myFormData = ref({});
 
 function initFormData() {
-  myFormData.value = flattenObject(props.formData);
+  myFormData.value = flattenObject(Object.assign(getFormData(), props.formData));
 
   const myFormDataKeys = Object.keys(myFormData.value);
 
