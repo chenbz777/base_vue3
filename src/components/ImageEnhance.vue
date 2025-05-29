@@ -15,6 +15,10 @@ const props = defineProps({
   mode: {
     type: String,
     default: 'contain'
+  },
+  errorText: {
+    type: String,
+    default: '图片加载失败'
   }
 });
 
@@ -73,7 +77,7 @@ function getThumbnailUrl() {
 
 function handleImageError() {
   currentSrc.value = '';
-  text.value = '图片加载失败';
+  text.value = props.errorText;
 
   emit('error');
 }
