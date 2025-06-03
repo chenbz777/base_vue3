@@ -45,8 +45,8 @@ watch(() => route.fullPath, () => {
 
   const {
     navigationStyle = '',
-    navigationBarBackgroundColor = '#ffffff',
-    navigationBarTextColor = '#000000',
+    navigationBarBackgroundColor = 'var(--bg-base-color)',
+    navigationBarTextColor = 'var(--text-base-color)',
     title = ''
   } = route.meta;
 
