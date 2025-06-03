@@ -35,6 +35,8 @@
   --br-4: 16px;
   --br-5: 24px;
 
+  --page-bg-color: rgba(245, 248, 251, 1);
+
   --bg-base-color: #ffffff;
   --bg-secondary-color: #f8f9fa;
   --bg-tertiary-color: #f2f4f5;
@@ -50,4 +52,24 @@
   --primary-text-color-1: #1677ff;
 
   --border-base-color: #dcdfe6;
+}
+
+/* 深色模式的样式 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg-color: #101010;
+
+    --bg-base-color: #242424;
+    --bg-secondary-color: #232323;
+    --bg-tertiary-color: #2a2a2a;
+
+    --text-base-color: #d4d4d4;
+    --text-secondary-color: #6d6d6d;
+
+    --primary-color: #1765ad;
+    --primary-text-color: #d4d4d4;
+
+    --primary-color-1: #d4d4d4;
+    --primary-text-color-1: #1765ad;
+  }
 }
